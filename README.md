@@ -19,7 +19,7 @@ https://www.lmt.de/latest/Drivers/USB,%20PCIe-serial/PL2303_Prolific_DriverInsta
 OpenVibe + g.Mobilab driver:
 http://openvibe.inria.fr/forum/viewtopic.php?p=13859
 http://openvibe.inria.fr/pub/bin/win32/
- (openvibe-gmobilab-1.2.1-setup.exe, of .. wij gebruiken nu openvibe-gmobilab-1.1.0-setup.exe)
+ (openvibe-gmobilab-1.2.1-setup.exe))
 
 Standalone OpenVibe scenario player to run the scripts (scenarios) without using the OpenVibe designer GUI
 http://openvibe.inria.fr/standalone-scenario-player/
