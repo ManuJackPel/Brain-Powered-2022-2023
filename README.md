@@ -1,5 +1,5 @@
 # Brain-Powered-2022-2023
-De repository voor de UvA honours cursus: Brain Powered 2022/2023
+The repository of a UvA honours course: Brain Powered 2022/2023, which is a project with the goal of designing and writing an algorithm that allows one to control a drone with their mind. Using EEG we want to measure signals coming from the motor cortex and extract the unqiue features from these signals that correlate with motor activity responsible for movement in the left and right hands and feet.
 
 # EEG data acquisition and streaming to python environment:
 OpenVibe EEG stream.xml: replacement for matlab. The OpenVibe software (version 1.2.1) includes a driver for the g.Mobilab. The script opens an LSL server to which it streams the raw EEG data.
