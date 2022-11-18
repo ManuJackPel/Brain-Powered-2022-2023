@@ -1,16 +1,18 @@
 #-----------------------------------------------------
 #IMPORT LIBRARIES
 #-----------------------------------------------------
+
 from datetime import datetime
 
 import numpy as np
 
 from pylsl import StreamInlet, resolve_stream
 
+#-----------------------------------------------------
+#IMPORT CLASSES
+#-----------------------------------------------------
 
-
-
-
+#import classes.insertclasshere
 
 #-----------------------------------------------------
 #MAIN LOOP
