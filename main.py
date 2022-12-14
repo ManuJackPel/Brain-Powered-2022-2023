@@ -5,10 +5,6 @@ import numpy as np
 # pylsl for lsl streaming, the streaming technology used by openvibe to stream to python (and other environments)
 from pylsl import StreamInlet, resolve_stream
 
-# twisteds loopingcall is used to synchronize python loops
-from twisted.internet import task
-from twisted.internet import reactor
-
 #define main loop
 def main():
 
@@ -33,13 +29,14 @@ def main():
         #sample, timestamp = inlet.pull_sample(timeout = 0.0)
         
         sample = np.array(sample)
-        data = np.hstack((data, sample))
+        sample = np.ndarray.transpose(sample)
+        data = np.column_stack((data, sample))
         #print(data)
-        print(sample, timestamp)
+        print(sample)
         #np.savetxt("data.csv", data, delimiter = ",")
         
         #check loopstate
-        if time.time()-starttime > 10:
+        if time.time()-starttime > 1:
             print(len(data))
             np.savetxt("data.csv", data, delimiter = ",")
             break
