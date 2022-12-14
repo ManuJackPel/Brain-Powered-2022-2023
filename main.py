@@ -1,7 +1,3 @@
-#-----------------------------------------------------
-#IMPORT LIBRARIES
-#-----------------------------------------------------
-
 from datetime import datetime
 import time
 import numpy as np
@@ -12,16 +8,6 @@ from pylsl import StreamInlet, resolve_stream
 # twisteds loopingcall is used to synchronize python loops
 from twisted.internet import task
 from twisted.internet import reactor
-
-#-----------------------------------------------------
-#IMPORT CLASSES
-#-----------------------------------------------------
-
-#import classes.insertclasshere
-
-#-----------------------------------------------------
-#MAIN LOOP
-#-----------------------------------------------------
 
 #define main loop
 def main():
