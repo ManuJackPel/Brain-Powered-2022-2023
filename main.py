@@ -42,19 +42,24 @@ def main():
     while True: 
         # get a new sample
         sample, timestamp = inlet.pull_sample()
+        
+        #Onderstaande line doet pull_samnple() maar zonder te wachten op een nieuwe sample. Voor volgende keer testen of hij dan niet meer synchroon loopt met de datastream
+        #sample, timestamp = inlet.pull_sample(timeout = 0.0)
+        
         sample = np.array(sample)
-        data = np.vstack((data, sample))
+        data = np.hstack((data, sample))
         #print(data)
         print(sample, timestamp)
-        np.savetxt("data.csv", data, delimiter = ",")
+        #np.savetxt("data.csv", data, delimiter = ",")
         
         #check loopstate
-        if time.time()-starttime > 2:
-            print("stop")
+        if time.time()-starttime > 10:
+            print(len(data))
+            np.savetxt("data.csv", data, delimiter = ",")
             break
        
 # start main loop
 if __name__ == '__main__':
-    #main()
-    task.LoopingCall(main).start(1.0)
+    main()
+    #task.LoopingCall(main).start(0.00390625)
     #reactor.run()
