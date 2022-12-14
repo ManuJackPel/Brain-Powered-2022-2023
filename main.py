@@ -30,16 +30,14 @@ def main():
         sample, timestamp = inlet.pull_sample()
         sample = np.array(sample)
         data = np.vstack((data, sample))
-        #print(data)
         print(sample, timestamp)
-        np.savetxt("data.csv", data, delimiter = ",")
+        # np.savetxt("data.csv", data, delimiter = ",")
         
         #check loopstate
         if time.time()-starttime > 2:
             print("stop")
             break
        
-# start main loop
 if __name__ == '__main__':
     #main()
     task.LoopingCall(main).start(1.0)
