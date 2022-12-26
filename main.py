@@ -12,7 +12,7 @@ def main():
     # First resolve an EEG stream on the lab network
     print("ls")
     streams = resolve_stream('type', 'EEG')
-
+   
     # Create a new inlet to read from the stream
     inlet = StreamInlet(streams[0])
 
@@ -32,7 +32,6 @@ def main():
         # get a new sample
         sample, timestamp = inlet.pull_sample()
         sample = np.array(sample)
-        sample = np.ndarray.transpose(sample)
         data = np.column_stack((data, sample))
         # print(sample)
 
