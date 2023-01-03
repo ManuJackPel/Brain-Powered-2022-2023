@@ -15,15 +15,13 @@ for i in range(3):
 root_directory = directory
 
 class DataLoader:
-    def __init__(self, data_source, participant=0, channels=np.arange(0,8)):
+    def __init__(self, data_source, channels, participant=0):
         self.participant = None
         
         # Input Check
         if participant < 10:
             participant = "0" + str(participant)
-
         assert len(channels) == 8
-        assert np.all(channels < 16)
 
         if data_source == "GIPSA-lab":
             # Get the amount of files that are
@@ -43,7 +41,7 @@ class DataLoader:
             fdata[:, -2] = fdata[:, -1] + fdata[:, -2] # Combine both colums
             fdata = np.delete(fdata, -1 , axis = 1)
 
-        self._data = fdata[:, channels]
+        self._data = fdata[:, self.channel_to_int(channels)]
         self._triggers = fdata[:, -1]
         self.last_pulled_index = -1
         self.pull_time = time.time() + 1/256
@@ -61,4 +59,23 @@ class DataLoader:
     def return_triggers(self):
         return self._triggers
 
+    def channel_to_int(self, ch_names):
+        ch_to_int = {
+            'Fp1' : 1,
+            'Fp2' : 2, 
+            'Fc5' : 3,
+            'Fz' : 4,
+            'Fc6' : 5,
+            'T7' : 6,
+            'Cz' : 7, 
+            'T8' : 8,
+            'P7' : 9,
+            'P3' : 10,
+            'Pz' : 11,
+            'P4' : 12,
+            'P8' : 13,
+            'O1' : 14,
+            'Oz' : 15,
+            'O2' : 16}
+        return [ch_to_int[ch_name] for ch_name in ch_names]
 
