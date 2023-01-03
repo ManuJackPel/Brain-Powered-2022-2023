@@ -11,8 +11,8 @@ sys.path.append(pard)
 
 from _code.classes import dataloader
 
-stream = dataloader.DataLoader('GIPSA-lab', participant = 0)
-
+channels = ['Fp1', 'Fp2', 'Fc5', 'Fz', 'Fc6', 'T7', 'Cz', 'T8']
+stream = dataloader.DataLoader('GIPSA-lab', channels, participant = 0)
 
 def test_static_sample_speed():
     test_duration = 5 # seconds
@@ -36,4 +36,7 @@ def test_combination_trigger_cols():
     triggers_combined_properly = np.array_equal(np.unique(triggers), np.array([0, 1., 2.]))
     assert triggers_combined_properly, f"When transforming the data the last column should only consist of 0, 1, 2"
 
-test_static_sample_speed()
+def test_channel_to_name():
+    ch_names = ['Fp2', 'Fc5', 'Cz', 'Fp1', 'Oz', 'P4', 'Fc6', 'Fz']
+    ch_ints = stream.channel_to_int(ch_names)
+    assert ch_ints.sort() == [2, 3, 7, 1, 15, 12, 5 ,4].sort()
