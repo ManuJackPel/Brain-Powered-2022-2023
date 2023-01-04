@@ -16,8 +16,8 @@ stream = dataloader.DataLoader('GIPSA-lab', channels, participant = 0)
 
 def test_static_sample_speed():
     test_duration = 5 # seconds
-    start_time = time.time()
     samp_data = stream.pull_sample()
+    start_time = time.time()
     while True:
         output = stream.pull_sample()
         samp_data = np.vstack((samp_data, output))
