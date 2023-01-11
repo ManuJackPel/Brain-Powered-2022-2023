@@ -1,5 +1,1 @@
-make a fake signal 
-	test if filter works
-	test if pwelch works
-
-
+	adjust shape stream.pull_sample for mne.filter.filter_sig

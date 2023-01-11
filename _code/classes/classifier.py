@@ -27,6 +27,12 @@ def is_valid_method_arguments(method: str, args: dict[str, Any]):
             "weights" : str,
             "algorithm" : str
             }
+    
+    rNN_type = {
+            "n_neighbors" : int,
+            "weights" : str,
+            "algorithm" : str
+            }
 
     # Match keyword to type dictionary 
     # Check that keyword exist
