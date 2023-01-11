@@ -5,8 +5,8 @@ import re
 import scipy 
 import numpy as np 
 import matplotlib.pyplot as plt
-import math
 import time
+
 
 # Acquire root directory
 directory = __file__
@@ -40,18 +40,21 @@ class DataLoader:
             fdata[fdata[:, -1] == 1, -1] = 2 # Convert 1 to 2 is last column
             fdata[:, -2] = fdata[:, -1] + fdata[:, -2] # Combine both colums
             fdata = np.delete(fdata, -1 , axis = 1)
+        else:
+            assert False, "invalid dataset passed to DataLoader"
 
         self._data = fdata[:, self.channel_to_int(channels)]
         self._triggers = fdata[:, -1]
-        self.last_pulled_index = -1
+        self.pull_index_head = -1
         self.pull_time = time.time() + 1/256
 
 
-    def pull_sample(self):
-        self.last_pulled_index += 1 
+    def pull_sample(self, n_pulled_samples):
+        self.pull_index_head += n_pulled_samples 
         time.sleep(max(0.0, self.pull_time - time.time()))
-        self.pull_time += 1/256
-        return self._data[self.last_pulled_index]
+        self.pull_time += n_pulled_samples/256
+        pull_index_tail = self.pull_index_head - n_pulled_samples
+        return self._data[pull_index_tail : self.pull_index_head]
     
     def return_data(self):
         return self._data

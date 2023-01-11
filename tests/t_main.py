@@ -1,57 +1,45 @@
-import numpy as np 
-import matplotlib.pyplot as plt
-import pandas as pd
-from math import pi 
-import mne
+import os 
+import sys
+import numpy as np
 import time
 
+# Change sys path to be able to import from Brain Powered Classes
+cwd = os.getcwd()
+pard = os.path.dirname(cwd)
+targetd = pard + '/Brain-Powered-2022-2023'
+sys.path.append(pard)
+
+from _code.classes import dataloader, preprocessor
+
 def main():
-    # Init Vars
-    Fs = 512
-    time = np.linspace(0, 10, Fs * 10) # Change it so * 10 is not necessary
-    sig = np.empty(len(time))
-    # freqs = [0.5, 5]
-
-    for i, frequency in enumerate(freqs):
-        sig = np.vstack((sig, np.sin(2 * np.pi * frequency * time)))
-    cum_sum_sig = np.sum(sig, axis=0) # Change it so * 10 is not necessary
-    # Remove 0-th empty column
-    sig = np.delete(sig, 0, 0)
+    # Parameter
+    channels = ['Fp1', 'Fp2', 'Fc5', 'Fz', 'Fc6', 'T7', 'Cz', 'T8']
+    n_samples_pulled = 256 * 5
+    dataset = 'GIPSA-lab'
+    participant = 0
+    Fs = 256 
+    filter_range = (4,6)
     
-    # Filter
-    filt_sig = mne.filter.filter_data(cum_sum_sig, Fs, None, 3.5, verbose=False)
-    # Pwelch
-    power, freq = mne.time_frequency.psd_array_welch(filt_sig, sfreq=Fs, verbose=False)
-    # Get average Alpha Band Power
-    alpha_range_hz = (8, 12)
-    inx = np.where(np.logical_and(freq >= 8, freq <= 12))
-    alpha_mean = np.mean(power[inx])
-    # Classify
-
-    alph_thresh = 0.005
-    if alpha_mean > alpha_thresh:
-        eyes_open = True
-    else:
-        eyes_open = False
-
-    # # Plot waves
-    # # for i in range(sig.shape[0]):
-    # #     plt.plot(sig[i, :])
-    # plt.plot(cum_sum_sig)
-    # plt.plot(filt_sig)
-    # plt.show()
-
-def classify(data):
-    clean_data = pre_process(data)
-    filtered_data = filter(clean_data)
+    # Paramter Classes
+    pp_params = {
+            "filt_range" : filter_range,
+            "samp_freq" : Fs,
+            }
+    pre_processor = preprocessor.Preprocess(pp_params)
     
-def filter(data):
-    pass
 
-def pre_process():
-    # FFT
-    pass
+    
+    # LOAD DATA
+    stream = dataloader.DataLoader(dataset, channels, participant)
+    samp_data = stream.pull_sample(n_samples_pulled)
+    start_time = time.time()
+    while True:
+        output = stream.pull_sample(n_samples_pulled)
+        # PRE-PROCESS
+        output = pre_processor.transform(output)
+        
+        print(output.shape[0])
+        print(time.time() - start_time)
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
-

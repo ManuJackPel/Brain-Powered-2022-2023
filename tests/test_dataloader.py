@@ -15,17 +15,18 @@ channels = ['Fp1', 'Fp2', 'Fc5', 'Fz', 'Fc6', 'T7', 'Cz', 'T8']
 stream = dataloader.DataLoader('GIPSA-lab', channels, participant = 0)
 
 def test_static_sample_speed():
-    test_duration = 5 # seconds
-    samp_data = stream.pull_sample()
+    test_duration = 6 # seconds
+    n_samples_pulled = 256
+    samp_data = stream.pull_sample(n_samples_pulled)
     start_time = time.time()
     while True:
-        output = stream.pull_sample()
-        samp_data = np.vstack((samp_data, output))
         if time.time() - start_time >= test_duration:
             break
+        output = stream.pull_sample(n_samples_pulled)
+        samp_data = np.vstack((samp_data, output))
     n_samples = samp_data.shape[0]
-    assert abs(n_samples - test_duration * 256) < 4
-
+    # todo: this compensates for the fact that while loop runs for one cycle longer
+    assert abs(n_samples - test_duration * 256) <= 256
 
 def test_data_shape():
     nrows, ncols = stream.return_data().shape
