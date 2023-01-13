@@ -1,0 +1,14 @@
+test that match case works
+pass dictionary as argument
+check argument dic for knn
+	determine how data should be inputted
+	test if a classifier works
+	
+
+implement  knn
+implement rnn
+	implement SVM
+	implement ANN 
+	implement LR
+	implement LDA
+
