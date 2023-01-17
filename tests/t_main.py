@@ -14,10 +14,11 @@ from _code.classes import dataloader, preprocessor
 def main():
     # Parameter
     channels = ['Fp1', 'Fp2', 'Fc5', 'Fz', 'Fc6', 'T7', 'Cz', 'T8']
-    n_samples_pulled = 256 * 5
+    Fs = 256 # Code always works in 256
+    t = 5
+    n_samples_pulled = Fs * t
     dataset = 'GIPSA-lab'
     participant = 0
-    Fs = 256 
     filter_range = (4,6)
     
     # Paramter Classes
@@ -32,14 +33,14 @@ def main():
     # LOAD DATA
     stream = dataloader.DataLoader(dataset, channels, participant)
     samp_data = stream.pull_sample(n_samples_pulled)
-    start_time = time.time()
     while True:
         output = stream.pull_sample(n_samples_pulled)
         # PRE-PROCESS
         output = pre_processor.transform(output)
+        # FEATURE EXTRACTION
+
+        # CLASSIFER
         
-        print(output.shape[0])
-        print(time.time() - start_time)
 
 if __name__ == '__main__':
     main()
