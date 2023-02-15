@@ -23,7 +23,7 @@ def datastream(connection):
         connection.send(data)
 
         #print parallel process
-        print(data)
+        #print(data)
 
         iterationnumber = iterationnumber + 1
 
@@ -46,15 +46,19 @@ def datavis(connection):
     x_vals = []
     y_vals = []
 
+    y1 = [1]
+
     index = count()
 
     def animate(i):
         
-        data = connection.recv()
-        
+        sample = connection.recv()
+        print(sample)
         x = i
-        y1 = data[0]
+        print(x)        
+        y1 = sample[0]
 
+        print(y1)
 
         plt.cla()
 
@@ -63,6 +67,7 @@ def datavis(connection):
 
         plt.legend(loc='upper left')
         plt.tight_layout()
+    
     
     ani = FuncAnimation(plt.gcf(), animate, interval=1)    
     plt.show()
