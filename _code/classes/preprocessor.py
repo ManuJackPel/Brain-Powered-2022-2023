@@ -14,3 +14,18 @@ class Preprocess():
 
     def transform(self, sample):
         return self.filter_sig(sample)
+
+
+valid_params = {
+        'filter_bounds' : tuple,
+        }
+
+parameter_checker = ParameterChecker(valid_params)
+
+
+def construct_preprocessor(preprocessor_params: dict):
+    # Iterate through the params
+    parameter_names = tuple(preprocessor_params.keys())
+    if not parameter_checker.is_valid_parameter_names(parameter_names):
+        return KeyError()
+    return None

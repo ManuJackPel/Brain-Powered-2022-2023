@@ -1,7 +1,6 @@
 "Class for choosing what data to import into the classification progam"
 
 import os 
-import re
 import scipy 
 import numpy as np 
 import matplotlib.pyplot as plt
@@ -81,4 +80,3 @@ class DataLoader:
             'Oz' : 15,
             'O2' : 16}
         return [ch_to_int[ch_name] for ch_name in ch_names]
-

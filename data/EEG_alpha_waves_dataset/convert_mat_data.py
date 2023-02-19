@@ -15,8 +15,6 @@ fname = "subject_" + str(participant)+ ".mat"
 fpath = os.path.join(data_directory, fname)
 # Col 1: Timestamps, Col 2-17: Electrode Recording, Col 18-19: Triggers for Condition 1 and 2
 fdata = scipy.io.loadmat(fpath)['SIGNAL']
-# Remove time channel 
-fdata = np.delete(fdata, 0, axis = 1)
 # Downsample from 512 Hz to 256 Hz
 fdata = fdata[::2]
 # # Combine columns indicating trigger for conditions

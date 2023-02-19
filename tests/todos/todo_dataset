@@ -1,0 +1,19 @@
+PyTorch style dataset initilization
+	cut dataset into pieces with labels
+	geenralize split_by_label, shorten var names
+
+	fix matlab data
+
+	change 512 to 256
+	specify which dataset you're loading
+	allow ability to select participant
+	allow ability to return label and training point for test and traing
+
+training_data = datasets.FashionMNIST(
+    root="data",
+    train=True,
+    download=True,
+    transform=ToTensor()
+)
+
+data = datasets.
