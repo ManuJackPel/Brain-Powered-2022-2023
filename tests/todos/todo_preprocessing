@@ -1,1 +1,6 @@
-	adjust shape stream.pull_sample for mne.filter.filter_sig
+Added parameterchecker 
+Added process maker
+Check valid parameters
+Check invalid parameters
+
+

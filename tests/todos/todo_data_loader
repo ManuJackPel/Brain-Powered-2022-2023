@@ -12,11 +12,8 @@ pass channels as diodes not numbers
 
 	multithread pulling of samples
 	fix that pytest slows it down
-	
 	pull_sample at a 256 pull_sample interval will always produce a array of 256 extra because pull_sample is pendng while time is alread over
-
-	
-	
+	wrap MobiLab in DataLoader
 
 
 

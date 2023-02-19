@@ -17,31 +17,21 @@ sys.path.append(pard)
 
 from _code.classes import dataloader, preprocessor
 
-def update_buffer(buffer, new_sample):
-    """
-    Removes older sample whilst adding newer sample, buffer size stays consistent
-    Returns immutable array
-    """
-    buffer.setflags(write=True)
-    samp_len = new_sample.shape[0]
-    buffer = np.roll(buffer, samp_len)
-    buffer[-samp_len:] = new_sample
-    buffer.setflags(write=False)
-    return buffer
 
 def datastream(connection):
     # Sample Parameters
     channels = ['Fp1', 'Fp2', 'Fc5', 'Fz', 'Fc6', 'T7', 'Cz', 'T8']
-    stream_hz = 256 # Code always works in 256 
     pull_interval = 0.25 # Time between samples pulled
+    stream_hz = 256 # Current setup always runs at 256 Hz
     n_samples_pulled = int(stream_hz * pull_interval) # N samples gotten per pull
 
     # DataSet parameters
     dataset = 'GIPSA-lab'
     participant = 0
+    channel = 0
 
     # Pipeline Parameters
-    classification_size = 1024
+    classification_size = 1024 * 10
     assert (classification_size % n_samples_pulled) == 0
 
     # LOAD DATA
@@ -52,22 +42,23 @@ def datastream(connection):
     data_buffer = np.zeros(classification_size)
     assert n_samples_pulled < data_buffer.shape[0], "Sample pull size is larger then sample buffer size"
     pull_iters = 0
+    start_time = time.time()
     while True:
         output = stream.pull_sample(n_samples_pulled)
-        output = output[participant] # change this in GIPSA-lab code
+        assert output.shape[0] == n_samples_pulled
+        output = output[:, :] # change this in GIPSA-lab code
         
         data_buffer = update_buffer(data_buffer, output)
 
         # Send data to pipe
         connection.send(data_buffer)
+        # print(data_buffer[32])
+        # print(time.time() - start_time)
 
         pull_iters += 1
-        print(pull_iters * n_samples_pulled)
         if pull_iters * n_samples_pulled == classification_size:
-            print(data_buffer)
             pull_iters = 0
             pass
-
             # PRE-PROCESS
             # FEATURE EXTRACTION
             # CLASSIFER
@@ -82,15 +73,25 @@ def data_vis(connection):
         plt.plot(xs, sample, '--', label='Channel 1')
         plt.tight_layout()
 
-    ani = FuncAnimation(plt.gcf(), animate, interval=1)    
+    ani = FuncAnimation(plt.gcf(), animate, interval=125)    
     plt.show()
   
+def update_buffer(buffer, new_sample):
+    """
+    Removes older sample whilst adding newer sample, buffer size stays consistent
+    Returns immutable array
+    """
+    buffer.setflags(write=True) # Make buffer unwriteable
+    samp_len = new_sample.shape[0]
+    buffer = np.roll(buffer, -samp_len)
+    buffer[-samp_len:] = new_sample
+    buffer.setflags(write=False) # Make buffer writeable
+    return buffer
 
 if __name__ == "__main__":  # confirms that the code is under main function
     
     # Init Pipeline, set duplex to False to make it unidirectional
     conn1, conn2 = Pipe(duplex=False)
-    print('Init Pipe')
 
     datastream_process = Process(target = datastream, args = (conn2,))
     datastream_process.start()

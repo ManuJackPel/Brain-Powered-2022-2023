@@ -1,10 +1,12 @@
-- documentation
-- cognitive task
-- preprocessing
-- feature extraction
-- classification
-- comparison & visualization
+Preprocessing
+	Filter
+Feature Extraction
+	PCA
+	PSD
+Classification
+	KNN
+	Naive Bayes
+	SVM
 
-	when running test in VScode doesn't run from tests/
 
-
+add dataset to test classifcation on
