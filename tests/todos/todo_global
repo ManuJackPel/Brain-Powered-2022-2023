@@ -5,8 +5,11 @@ Feature Extraction
 	PSD
 Classification
 	KNN
-	Naive Bayes
 	SVM
+	Naive Bayes
+
+Builder for process
 
 
 add dataset to test classifcation on
+DataLoader needs MobiLab support
