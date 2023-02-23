@@ -1,2 +1,4 @@
-ability to easily make parameter checkers for each process
-import JSONs
+	ability to easily make parameter checkers for each process
+	import JSONs
+	should be able to tell if a parameter matches the class
+	should be able to check if a value is part of a list
