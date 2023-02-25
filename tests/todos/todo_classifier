@@ -1,20 +1,2 @@
-Classifier should take name
-add function -> adds parameter argument
-print the parameter along with the value
-make sure keyword is in dictionary
-	check parameters_
-	Should check passed name
-	Should return information
-
-
-builder = Builder()
-builder.add(param_name, param_value)
-builder.add(param_name, param_value)
-builder.add(param_name, param_value)
-product = builder.build()
-
-class.fit()
-class.predict()
-
-
-
+	add ensemble classifiers
+	add some parameter checking in add function
