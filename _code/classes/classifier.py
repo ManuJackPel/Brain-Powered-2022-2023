@@ -1,17 +1,19 @@
 from sklearn.neighbors import KNeighborsClassifier, RadiusNeighborsClassifier
+from sklearn.svm import LinearSVC, NuSVC, SVC
 from typing import Any
-from .parameter_checker import ParameterChecker
-
+from copy import deepcopy
 
 Part = tuple[str, Any]
-valid_classifier_parameters = {
-        'classifier' : str,
-        'n_neighbors' : int,
-        'algorithm' : str,
-        }
-ClfParCheck = ParameterChecker(valid_classifier_parameters)
 
-class Product1():
+clf_name_to_algo_map = {
+        'kNN' : KNeighborsClassifier,
+        'rNN' : RadiusNeighborsClassifier,
+        'linear_SVC' : LinearSVC,
+        'SVC' : SVC,
+        'NuSVC' : NuSVC,
+        }
+
+class ClassifierBuilder():
     """
     It makes sense to use the Builder pattern only when your products are quite
     complex and require extensive configuration.
@@ -32,78 +34,38 @@ class Product1():
         self.parts[part_name] = part_value
 
     def is_valid_part(self, part) -> bool:
-        part_name, part_value = part
-        if not ClfParCheck.is_valid_parameter_names(part_name):
-            print(f"'{part_name}' is not a valid Class parameter name")
-            return False
-        if not ClfParCheck.is_valid_parameter_types(part):
-            print(f"{part_value} has type {type(part_value)}, does not match type for '{part_name}', should be {ClfParCheck.return_paramter_type(part_name)}")
-            return False
+        # Temporary until we find a good way to implement checkign parameters
         return True
 
-    def list_parts(self) -> list:
-        return self.parts
+    def return_info(self):
+        return deepcopy(self.parts)
+
+    def return_classifier_name(self) -> str:
+        return self.parts['classifier_name']
     
+    def return_classifier_parameters(self) -> dict:
+        clf_params = {key : self.parts[key] for key in self.parts.keys() if key != 'classifier_name'}
+        return clf_params
+
     def build(self) -> None:
-        pass
+        classifier_name = self.return_classifier_name()
+        classifier_params = self.return_classifier_parameters()
+        classifier_algorithm = clf_name_to_algo_map[classifier_name](**classifier_params)
+        return Classifier(classifier_algorithm, classifier_params)
 
 class Classifier():
     """Interface for accessing EEG classification methods"""
-    def __init__(self, method: str, meth_args: dict=None):
-        if is_valid_method_arguments == False:
-            assert False, "Invalid arguents passed for given method"
+    def __init__(self, classifier_algorithm, parameters):
+        self.clf_algo =  classifier_algorithm
+        self.parameters = parameters
 
-        match method:
-            case 'kNN':
-                self.method = KNeighborsClassifier()
-            case 'rNN':
-                self.method = RadiusNeighborsClassifier()
-
-    def fit(self, training_sample):
+    def fit(self, training_data):
         """Fit model"""
-        self.method.fit(training_sample)
+        self.clf_algo.fit(training_data)
 
     def predict(self, sample):
-        return self.predict(sample)
+        return self.clf_algo.predict(sample)
 
-def is_valid_method_arguments(method: str, args: dict[str, Any]):
-    """Check that argument passed for a method are valid"""
-    kNN_types = {
-            "n_neighbors" : int,
-            "weights" : str,
-            "algorithm" : str
-            }
-    
-    rNN_type = {
-            "n_neighbors" : int,
-            "weights" : str,
-            "algorithm" : str
-            }
-
-    # Match keyword to type dictionary 
-    # Check that keyword exist
-    match method:
-        case "kNN":
-            type_dict = kNN_types
-        case other: 
-            print("Passed a method which does not exist")
-            return False
-    
-    # Check that all arguments are present
-    if list(args.keys()) != list(type_dict.keys()):
-        return False
-
-    # Check that types are correct
-    for keyword in type_dict.keys():
-        if type_dict[keyword] != type(args[keyword]):
-            return False
-    return True
-
-    
-
-
-
-    
-
-
+    def list_parameters(self):
+        return self.parameters
 

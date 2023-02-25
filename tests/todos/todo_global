@@ -1,15 +1,15 @@
-Preprocessing
-	Filter
-Feature Extraction
-	PCA
-	PSD
-Classification
-	KNN
-	SVM
-	Naive Bayes
-
-Builder for process
+TODO
+	Finish & Test Feature Extractor
+	Setup Training Datasets From GIPSA-lab
+	Fix Plot Display
 
 
-add dataset to test classifcation on
-DataLoader needs MobiLab support
+Future Implementations
+	Run multiple classifiers in parallel
+	Add verbosity to builders
+	K-fold cross validation
+
+
+DONE
+	Finish & Test Preprocessor
+

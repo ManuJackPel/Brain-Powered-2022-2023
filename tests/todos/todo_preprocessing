@@ -1,6 +1,32 @@
-Added parameterchecker 
-Added process maker
-Check valid parameters
-Check invalid parameters
+Desired behavior:
+	pp_builder = PreProcesseorBuilder()
+	filter_params = {}
+	pp_builder.add_filter(**filter_params)
+
+	pp_builder.list_parts() -> 'mne_filter'
+	pp = pp_builder.build()
+	pp.process(data) same as mne_filter_data(data)
+
+	pp_builder.reset()
+	pp_builder.list_parts -> []
+
+	pp_builder.build -> Error -> Freeze?
+
+
+
+TODO
+	Handle Build Errors
+
+	
+
+Future Implementations
+
+DONE
+	find a way to list the parts
+	Test if mne_filter and PP_filter produce same output
+	
+
+
+	
 
 
