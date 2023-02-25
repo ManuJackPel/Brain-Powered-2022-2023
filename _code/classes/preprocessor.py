@@ -1,31 +1,34 @@
-import numpy as np
-import mne
+from mne.filter import filter_data
 
-class Preprocess():
-    """Interface for preprocessin EEG classification methods"""
-    def __init__(self, pp_args: dict):
-        self.filt_range = pp_args['filt_range']
-        self.samp_freq = pp_args['samp_freq']
+class PreProcessorBuilder():
+    def __init__(self) -> None:
+        self.reset()
 
-    def filter_sig(self, sample):
-        low_bnd, up_bnd = self.filt_range
-        filt_sig = mne.filter.filter_data(sample, self.samp_freq, low_bnd, up_bnd, verbose=False)
-        return filt_sig
+    def reset(self) -> None:
+        self.parts = []
 
-    def transform(self, sample):
-        return self.filter_sig(sample)
+    def add_filter(self, filter_params: dict[str,any]) -> None:
+        self.parts.append(filter_data(**filter_params))
 
-
-valid_params = {
-        'filter_bounds' : tuple,
-        }
-
-parameter_checker = ParameterChecker(valid_params)
+    def build(self) -> PreProcesser:
+        return PreProcesser(self.parts)
+        
 
 
-def construct_preprocessor(preprocessor_params: dict):
-    # Iterate through the params
-    parameter_names = tuple(preprocessor_params.keys())
-    if not parameter_checker.is_valid_parameter_names(parameter_names):
-        return KeyError()
-    return None
+class PreProcesser():
+    def __init__(self, parts: list):
+        self.processes = parts
+        
+    def process_data(self, data: ndarray) -> ndarray:
+        for process in self.processes:
+            data = process(data)
+        return data
+    def list_processes():
+        return self.processes
+            
+
+
+    
+
+
+        
