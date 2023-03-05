@@ -55,7 +55,6 @@ def test_pp_builder_list_parts():
     parts = pp_builder.list_parts()
     assert parts == ['fir_filter'], "Listed Parts do not match with added parts for PreProcessorBuilder"
 
-
 def test_pp_same_as_mne_filter():
     pp_builder = init_pp_builder_with_filter()
     pp = pp_builder.build()

@@ -1,0 +1,16 @@
+Desired Behavior
+	f(G_data) -> our format
+
+
+TODO
+	cut dataset into pieces with labels
+	geenralize split_by_label, shorten var names
+
+	fix matlab data
+
+	change 512 to 256
+
+Future Implementations
+
+DONE
+	decide on preferred data format

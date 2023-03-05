@@ -30,7 +30,7 @@ def test_builder_added_items_listed():
                 'classifier_name' : 'kNN',
                 'n_neighbors': 3, 
                 }
-    assert added_parts == valid_parts, "Add parts are not present in the classifier builder"
+    assert added_parts == valid_parts, "Addes parts are not present in the classifier builder"
 
 def test_clf_builder_parts_return_right_values():
     clf_builder = init_basic_builder()
