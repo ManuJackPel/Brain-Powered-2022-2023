@@ -5,18 +5,29 @@ import scipy
 import numpy as np 
 import matplotlib.pyplot as plt
 import time
+from pylsl import StreamInlet, resolve_stream
 
+class MobiLab:
+    def __init__(self):
+        # Resolve EEG stream on lab networ
+        streams = resolve_stream('type', 'EEG')
+        # Create a new inlet to read from 
+        self.inlet = StreamInlet(streams[0])
 
-# Acquire root directory
-directory = __file__
-for i in range(3):
-    directory = os.path.dirname(directory)
-root_directory = directory
-
+    def pull_sample(self):
+        sample, timestamp = self.inlet.pull_sample()
+        return sample
+        
 class DataLoader:
     def __init__(self, data_source, channels, participant=0):
         self.participant = None
         
+        # Acquire root directory
+        directory = __file__
+        for i in range(3):
+            directory = os.path.dirname(directory)
+        root_directory = directory
+
         # Input Check
         if participant < 10:
             participant = "0" + str(participant)
@@ -80,3 +91,5 @@ class DataLoader:
             'Oz' : 15,
             'O2' : 16}
         return [ch_to_int[ch_name] for ch_name in ch_names]
+
+
