@@ -15,8 +15,7 @@ class MobiLab:
         self.inlet = StreamInlet(streams[0])
 
     def pull_sample(self):
-        sample, timestamp = self.inlet.pull_sample()
-        return sample
+        return self.inlet.pull_sample()
         
 class DataLoader:
     def __init__(self, data_source, channels, participant=0):
