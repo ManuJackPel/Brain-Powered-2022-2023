@@ -1,0 +1,15 @@
+DESIRED BEHAVIOR
+	recorder = Recording('pp1/svm/test/csv')
+		# -> prints current directory is Brain Powered/
+	while True:
+		recorder.append_data(inlet.pull_sample())
+	
+TODO
+	then find the data file and append file_name to that
+	it then saves it as csv
+
+
+	better way to fix os
+	better way to do sample params
+
+

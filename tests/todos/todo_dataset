@@ -17,3 +17,4 @@ training_data = datasets.FashionMNIST(
 )
 
 data = datasets.
+

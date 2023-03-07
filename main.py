@@ -75,18 +75,6 @@ def update_buffer(buffer, new_sample):
     return buffer
 
 if __name__ == "__main__":  
-    # pipeline = (
-    #         contruct_pre_processor(),
-    #         construct_feature_extractor(),
-    #         construct_classifier(),
-    #         )
-    pipeline = (
-            lambda a: a,
-            lambda b: b,
-            lambda c: c,
-            1024
-            )
-    
     # Init Pipeline, set duplex to False to make it unidirectional
     conn1, conn2 = Pipe(duplex=False)
 
