@@ -6,7 +6,7 @@ import numpy as np
 
 from _code.classes import dataloader, preprocessor
 
-def datastream(connection, dataloader, recorder):
+def datastream(connection, pipeline):
     # Sample Parameters
     channels = ['Fp1', 'Fp2', 'Fc5', 'Fz', 'Fc6', 'T7', 'Cz', 'T8']
     pull_interval = 0.25 # Time between samples pulled
@@ -31,10 +31,8 @@ def datastream(connection, dataloader, recorder):
 
     while True:
         output = stream.pull_sample(n_samples_pulled)
+        assert output.shape[0] == n_samples_pulled
         output = output[:, channel] # change this in GIPSA-lab code
-        # Output to external dataset here
-        # add output
-        recorder.save(output)
         
         data_buffer = update_buffer(data_buffer, output)
 
@@ -42,12 +40,14 @@ def datastream(connection, dataloader, recorder):
         connection.send(data_buffer)
 
         pull_iters += 1
-        # When an entire output is reached
         if pull_iters * n_samples_pulled == classification_size:
             pull_iters = 0
             # PRE-PROCESS
+            pp_data = pre_process(data_buffer)
             # FEATURE EXTRACTION
+            fe_data = extract_features(pp_data)
             # CLASSIFER
+            _class = classify(fe_data)
 
 def data_vis(connection):
     def animate(i):
@@ -75,7 +75,6 @@ def update_buffer(buffer, new_sample):
     return buffer
 
 if __name__ == "__main__":  
-    
     # Init Pipeline, set duplex to False to make it unidirectional
     conn1, conn2 = Pipe(duplex=False)
 

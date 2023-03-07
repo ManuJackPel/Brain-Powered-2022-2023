@@ -1,15 +1,12 @@
 TODO
-	Finish & Test Feature Extractor
-	Setup Training Datasets From GIPSA-lab
-	Fix Plot Display
-
-
-Future Implementations
-	Run multiple classifiers in parallel
-	Add verbosity to builders
-	K-fold cross validation
+	saving_refresh_rate should be a attribute of recorder, 
+	add verbosity to recorder
+	inlet should be saved to buffer, and saved when buffer is full 
+	recorder should add header to top of file
 
 
 DONE
-	Finish & Test Preprocessor
 
+FUTURE
+	test that update_buffer works
+	turn whole get directory into a function

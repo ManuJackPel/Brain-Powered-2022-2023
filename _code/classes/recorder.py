@@ -25,5 +25,32 @@ class Recorder():
             f.write(self.header)
             f.close()
 
+def make_buffer(header: list, buffer_size: int) -> np.ndarray:
+    col_size = len(header)
+    row_size = buffer_size
+    return np.zeros((row_size, col_size))
 
 
+def update_buffer(buffer, new_sample):
+    """
+    Queue. Oldest data is removed and newest data is appended
+    Returns immutable array
+    """
+    # Make buffer mutable
+    buffer.setflags(write=True) 
+
+    # If sample is 1-dimensional get length
+    # Else get amount of rows
+    if len(new_sample.shape) == 0:
+        print('Empty sample was passed')
+    elif len(new_sample.shape) == 1:
+        rows_to_roll = 1
+    else:
+        rows_to_roll = new_sample.shape[0]
+        
+    buffer = np.roll(buffer, -rows_to_roll, axis=0)
+
+    buffer[-rows_to_roll:, :] = new_sample
+    # Make buffer immutable
+    buffer.setflags(write=False) 
+    return buffer
