@@ -1,5 +1,13 @@
-implement PCA
-implement CSP
-implement DWT
 
+Desired Behavior
+
+TODO
+
+Future Implementations
+	Spectral Power Density
+	Signal Variance
+	Short-Time Future Transform
+	Wavelet Transform
+
+DONE
 

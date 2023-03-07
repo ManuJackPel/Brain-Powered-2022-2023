@@ -1,0 +1,10 @@
+0.4641 	WARNING 	Speech-to-text recognition module not available (use command `pip install SpeechRecognition` to get it. Transcription will be unavailable.
+0.7622 	WARNING 	We strongly recommend you activate the PTB sound engine in PsychoPy prefs as the preferred audio engine. Its timing is vastly superior. Your prefs are currently set to use ['pyo', 'pygame', 'PTB', 'sounddevice'] (in that order).
+3.9598 	EXP 	Created window1 = Window(allowGUI=True, allowStencil=False, autoLog=True, backendConf=UNKNOWN, bitsMode=UNKNOWN, blendMode='avg', bpc=(8, 8, 8), color=array([-1., -1., -1.]), colorSpace='rgb', depthBits=8, fullscr=<method-wrapper '__getattribute__' of attributeSetter object at 0x000001CB0D8D0248>, gamma=None, gammaErrorPolicy='raise', lms=UNKNOWN, monitor=<psychopy.monitors.calibTools.Monitor object at 0x000001CB0F569488>, multiSample=False, name='window1', numSamples=2, pos=[0.0, 0.0], screen=0, size=array([1920, 1080]), stencilBits=0, stereo=False, units='height', useFBO=True, useRetina=False, viewOri=0.0, viewPos=None, viewScale=None, waitBlanking=True, winType='pyglet')
+3.9599 	EXP 	window1: mouseVisible = True
+3.9600 	EXP 	window1: mouseVisible = False
+3.9600 	EXP 	window1: recordFrameIntervals = False
+4.0279 	EXP 	window1: recordFrameIntervals = True
+4.0655 	WARNING 	t of last frame was 9.80ms (=1/102)
+4.1321 	EXP 	window1: recordFrameIntervals = False
+5.3697 	EXP 	window1: mouseVisible = True

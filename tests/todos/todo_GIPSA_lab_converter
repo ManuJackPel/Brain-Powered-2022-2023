@@ -1,0 +1,12 @@
+Desired Behavior
+	f(G_data) -> our format
+
+
+TODO
+	cut dataset into pieces with labels
+	change 512 to 256
+
+Future Implementations
+
+DONE
+	decide on preferred data format

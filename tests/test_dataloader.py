@@ -13,7 +13,6 @@ from _code.classes import dataloader
 
 channels = ['Fp1', 'Fp2', 'Fc5', 'Fz', 'Fc6', 'T7', 'Cz', 'T8']
 stream = dataloader.DataLoader('GIPSA-lab', channels, participant = 0)
-
 def test_static_sample_speed():
     test_duration = 6 # seconds
     n_samples_pulled = 256

@@ -14,6 +14,7 @@ from _code.classes.parameter_checker import ParameterChecker
 param_types = {
         'filter_bounds' : tuple,
     }
+
 parameter_checker = ParameterChecker(param_types)
 
 def test_param_checker_valid_names():
