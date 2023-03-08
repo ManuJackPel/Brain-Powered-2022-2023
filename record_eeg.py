@@ -8,6 +8,7 @@ from multiprocessing import Process, Pipe
 import multiprocessing
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
+import scipy.signal
 
 from _code.classes.recorder import make_buffer, update_buffer
 from _code.classes.dataloader import MobiLab
@@ -24,17 +25,26 @@ def data_stream(pipe_start):
         sample, timestamp = eeg_stream.pull_sample()
         data_buffer = update_buffer(data_buffer, np.array(sample))
         pipe_start.send(data_buffer)
-
         
 def data_visualization(pipe_end):
     def animate(i):
-        # Pull sample from pipe
         received_data = pipe_end.recv()
-        xs = np.arange(0, received_data.shape[0])
 
-        plt.cla()
-        plt.plot(xs, received_data, '--', label='Channel 1')
-        plt.tight_layout()
+        if len(received_data.shape) == 1:
+            raise Exception('Visualization does not work with 1D data')
+
+
+        # f, S = scipy.signal.periodogram(received_data, 512, scaling='density')
+        # plt.semilogy(f, S)
+        # plt.ylim([1e-7, 1e2])
+        # plt.xlim([0,100])
+        # plt.xlabel('frequency [Hz]')
+        # plt.ylabel('PSD [V**2/Hz]')
+        # plt.tight_layout()
+        # plt.cla()
+
+        xs = np.arange(0, received_data.shape[0])
+        plt.plot(xs, received_data[:,[0,-1]], '--', label='Channel 1')
 
     ani = FuncAnimation(plt.gcf(), animate, interval=125)    
     plt.show()
