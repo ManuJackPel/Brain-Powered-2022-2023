@@ -37,6 +37,7 @@ def data_vis(connection):
 # Plot voltage of channel one, received from pipe
 
     def animate(i):
+
         # Pull sample from pipe
         sample = connection.recv()
         xs = np.arange(0, sample.shape[0])
