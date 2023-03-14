@@ -1,8 +1,7 @@
 ﻿#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-This experiment was created using PsychoPy3 Experiment Builder (v2022.2.5),
-    on March 06, 2023, at 16:34
+This experiment was created using PsychoPy3 Experiment Builder (v2022.2.5), on March 06, 2023, at 16:34
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -105,8 +104,7 @@ defaultKeyboard = keyboard.Keyboard(backend='iohub')
 text = visual.TextStim(win=win, name='text',
     text='Op het volgende scherm ziet u een kruis waarop u zich moet fixeren. \nDoe dit voor 10 seconden. \nAchter het fixatiepunt zult u de timer zien. \nU zult eerst 3 seconden de tijd krijgen voordat u zich moet fixeren. Dan verschijnt het fixatiepunt.\nNadat de 10 seconden voorbij zijn zult u een geluidseffect horen om te aan te geven dat u mag rusten. \nDan zult u een tussenscherm zien.\nNa dit tussenscherm krijgt u weer 3 seconden voor de voorbereiding.\nNa de countdown moet u uw ogen 10 seconden lang sluiten. U zal weer een geluidseffect te horen krijgen wanneer deze 10 seconden voorbij is. Dit gehele proces herhaalt 6 keer.\n\n\nDruk op de spatiebalk om door te gaan\n',
     font='Open Sans',
-    pos=(0, 0), height=0.04, wrapWidth=0.9, ori=0.0, 
-    color='white', colorSpace='rgb', opacity=None, 
+    pos=(0, 0), height=0.04, wrapWidth=0.9, ori=0.0, color='white', colorSpace='rgb', opacity=None, 
     languageStyle='LTR',
     depth=0.0);
 key_resp = keyboard.Keyboard()

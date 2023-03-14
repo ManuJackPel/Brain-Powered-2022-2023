@@ -1,12 +1,10 @@
 TODO
-	saving_refresh_rate should be a attribute of recorder, 
-	add verbosity to recorder
-	inlet should be saved to buffer, and saved when buffer is full 
-	recorder should add header to top of file
-
+	run alpha task in parallel to tasks
+	add a row for the condition 
+	prompt a user if they want to remove an already existing file
+	
+	get recording to work 
 
 DONE
 
 FUTURE
-	test that update_buffer works
-	turn whole get directory into a function
