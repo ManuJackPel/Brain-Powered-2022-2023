@@ -80,7 +80,7 @@ def filesave(inputdata):
 
         if 'stop_threshold' in condition:
             print('saving the data')
-            f = open('dev_code/psychopy/Psychopy/condition.txt', 'w')
+            f = open('dev_code/psychopy/condition.txt', 'w')
             f.writelines(['saving the data\n', participant])
             f.close()
 
