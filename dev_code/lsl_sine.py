@@ -4,6 +4,7 @@ LSL."""
 import random
 import time
 import math
+
 from pylsl import StreamInfo, StreamOutlet
 
 # first create a new stream info (here we set the name to BioSemi,
