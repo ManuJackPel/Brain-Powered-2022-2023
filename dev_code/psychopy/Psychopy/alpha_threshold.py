@@ -14,6 +14,7 @@ If you publish work using this script the most relevant publication is:
 # --- Import packages ---
 from psychopy import locale_setup
 from psychopy import prefs
+prefs.hardware['audioLib'] = ['pyo', 'pygame', 'sounddevice']
 from psychopy import sound, gui, visual, core, data, event, logging, clock, colors#, layout
 from psychopy.constants import (NOT_STARTED, STARTED, PLAYING, PAUSED,
                                 STOPPED, FINISHED, PRESSED, RELEASED, FOREVER)
@@ -28,6 +29,12 @@ import sys  # to get file system encoding
 import psychopy.iohub as io
 from psychopy.hardware import keyboard
 
+from pathlib import Path
+
+#MAKE DIRECTORY STRING, BASED ON CURRENT WORKING DIRECTORY AN FORMAT WITH CORRECT FORWARD SLASHES
+bruhdirectory = Path(os.getcwd(), r"Assets\\bruh.wav")
+alpha_task_directory = Path(os.getcwd(), r"Psychopy\\alpha_threshold.py")
+print(bruhdirectory.as_posix)
 
 
 # Ensure that relative paths start from the same directory as this script
@@ -53,7 +60,7 @@ filename = _thisDir + os.sep + u'data/%s_%s_%s' % (expInfo['participant'], expNa
 # An ExperimentHandler isn't essential but helps with data saving
 thisExp = data.ExperimentHandler(name=expName, version='',
     extraInfo=expInfo, runtimeInfo=None,
-    originPath='C:\\Users\\david\\Documents\\python scripts\\Brain-Powered-2022-2023-main\\Psychopy\\alpha_threshold.py',
+    originPath= alpha_task_directory.as_posix,
     savePickle=True, saveWideText=True,
     dataFileName=filename)
 # save a log file for detail verbose info
@@ -214,7 +221,7 @@ fixatiekruis = visual.TextStim(win=win, name='fixatiekruis',
     depth=-11.0);
 
 # --- Initialize components for Routine "ogen_dicht" ---
-bruh = sound.Sound('C:/Users/david/Documents/python scripts/Brain-Powered-2022-2023-main/Assets/bruh.wav', secs=1.0, stereo=True, hamming=True,
+bruh = sound.Sound(bruhdirectory.as_posix, secs=1.0, stereo=True, hamming=True,
     name='bruh')
 bruh.setVolume(1.0)
 
@@ -259,8 +266,10 @@ key_resp.keys = []
 key_resp.rt = []
 _key_resp_allKeys = []
 # Run 'Begin Routine' code from start_threshold
+print(expInfo['participant'])
+print('start')
 f = open("condition.txt", "w")
-f.write("start_threshold")
+f.writelines(["start_threshold\n", expInfo['participant']])
 f.close()
 # keep track of which components have finished
 UitlegComponents = [text, key_resp]
@@ -512,7 +521,7 @@ for thisCountdownlioop in countdownlioop:
     # update component parameters for each repeat
     # Run 'Begin Routine' code from open_condition
     f = open("condition.txt", "w")
-    f.write("open")
+    f.writelines(["open\n", expInfo['participant']])
     f.close()
     # keep track of which components have finished
     countdownComponents = [een, twee, drie, vier, vijf, zes, zeven, acht, negen, tien, fixatiekruis]
@@ -789,11 +798,11 @@ for thisCountdownlioop in countdownlioop:
     continueRoutine = True
     routineForceEnded = False
     # update component parameters for each repeat
-    bruh.setSound('C:/Users/david/Documents/python scripts/Brain-Powered-2022-2023-main/Assets/bruh.wav', secs=1.0, hamming=True)
+    bruh.setSound(bruhdirectory.as_posix, secs=1.0, hamming=True)
     bruh.setVolume(1.0, log=False)
     # Run 'Begin Routine' code from closed_condition
     f = open("condition.txt", "w")
-    f.write("closed")
+    f.writelines(["closed\n", expInfo['participant']])
     f.close()
     # keep track of which components have finished
     ogen_dichtComponents = [bruh]
@@ -1047,7 +1056,7 @@ key_resp_2.rt = []
 _key_resp_2_allKeys = []
 # Run 'Begin Routine' code from stop_threshold
 f = open("condition.txt", "w")
-f.write("stop_threshold")
+f.writelines(["stop_threshold\n", expInfo['participant']])
 f.close()
 # keep track of which components have finished
 bedankt__doeiComponents = [bedanktdoei, key_resp_2]
