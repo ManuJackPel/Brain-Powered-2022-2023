@@ -15,23 +15,24 @@ def datastream(vis_in, eye_in):
     streams = resolve_stream('type', 'EEG')   
     # Create a new inlet to read from the stream
     inlet = StreamInlet(streams[0])
-    
-    x=0
+    data = np.zeros(9)   
+     
     while True:
-        #start = time.time()
-        x=x+1
-
+        start = time.time()
+        
         #make the EEG data every time
         data, timestamp  = inlet.pull_sample()
-        data = np.zeros(9)
+        
 
         #send data to pipe
         vis_in.send(np.array(data))
         eye_in.send(np.array(data))
-        #end = time.time()
-        print(x)
-        #if(x>40):
-         #   print(1/(end - start))
+        end = time.time()
+        
+        if(end>start):
+            #print(1/(end - start))
+
+        print(data)
 
 def data_vis(connection):
 # Plot voltage of channel one, received from pipe
@@ -41,14 +42,18 @@ def data_vis(connection):
         # Pull sample from pipe
         sample = connection.recv()
         xs = np.arange(0, sample.shape[0])
-
+        print(sample.shape[0])
         plt.cla()
         plt.plot(xs, sample, '--', label='Channel 1')
-        plt.tight_layout()
+        #plt.tight_layout()
 
-    ani = FuncAnimation(plt.gcf(), animate, interval=125)    
+    ani = FuncAnimation(plt.gcf(), animate, interval=1)    
     plt.show()
 
+
+    while True:
+        sample = connection.recv()
+        #print(sample)
 
 def eyestate(connection):
 #Parse current eye condition from condition.txt, combine it with the data and save it as .csv
