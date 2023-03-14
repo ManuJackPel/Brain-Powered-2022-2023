@@ -269,7 +269,7 @@ _key_resp_allKeys = []
 print(expInfo['participant'])
 print('start')
 f = open("condition.txt", "w")
-f.writelines(["start_threshold\n", expInfo['participant']])
+f.writelines("start_threshold", "\n", expInfo['participant'])
 f.close()
 # keep track of which components have finished
 UitlegComponents = [text, key_resp]
