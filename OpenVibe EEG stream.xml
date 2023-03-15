@@ -1,7 +1,7 @@
 <OpenViBE-Scenario>
 	<FormatVersion>2</FormatVersion>
 	<Creator>OpenViBE Designer</Creator>
-	<CreatorVersion>3.3.1</CreatorVersion>
+	<CreatorVersion>3.4.0</CreatorVersion>
 	<Settings></Settings>
 	<Inputs></Inputs>
 	<Outputs></Outputs>
@@ -39,7 +39,7 @@
 			<Attributes>
 				<Attribute>
 					<Identifier>(0x1fa7a38f, 0x54edbe0b)</Identifier>
-					<Value>160</Value>
+					<Value>192</Value>
 				</Attribute>
 				<Attribute>
 					<Identifier>(0x207c9054, 0x3c841b63)</Identifier>
@@ -157,7 +157,7 @@
 	<Comments></Comments>
 	<Metadata>
 		<Entry>
-			<Identifier>(0x0000378b, 0x000064d4)</Identifier>
+			<Identifier>(0x000065e8, 0x00005b82)</Identifier>
 			<Type>(0x3bcce5d2, 0x43f2d968)</Type>
 			<Data>[]</Data>
 		</Entry>
