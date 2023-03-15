@@ -56,22 +56,3 @@ if __name__ == "__main__":
 
     visualization_process = Process(target = data_visualization, args = (conn1,))
     visualization_process.start()
-
-        # if len(received_data.shape) == 1:
-        #     raise Exception('Visualization does not work with 1D data')
-
-
-        # f, S = scipy.signal.periodogram(received_data, 512, scaling='density')
-        # plt.semilogy(f, S)
-        # plt.ylim([1e-7, 1e2])
-        # plt.xlim([0,100])
-        # plt.xlabel('frequency [Hz]')
-        # plt.ylabel('PSD [V**2/Hz]')
-        # plt.tight_layout()
-        # plt.cla()
-
-        # xs = np.arange(0, received_data.shape[0])
-        # plt.plot(xs, received_data[:,[0,-1]], '--', label='Channel 1')
-
-    # ani = FuncAnimation(plt.gcf(), animate, interval=125)    
-    # plt.show()

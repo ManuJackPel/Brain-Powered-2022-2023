@@ -2,27 +2,44 @@ import numpy as np
 import os
 
 class Recorder():
-    def __init__(self, file_name, header):
+    def __init__(self, file_name:str, header:list):
         self.file_name = file_name
         self.header = header
+        self.data_buffer = np.empty((0, len(header)))
 
-    def append_data(self, data):
+        if not self.file_name_exists():
+            self._create_file()
+
+    def append_data(self, data): 
         if self.file_name_exists():
-            self._append_to_txt(data)
+            self._append_to_buffer(data)
         else:
-            self._create_txt()
+            self._create_file()
+            self._append_to_buffer(data)
+
+    def save(self, reset_buffer=True) -> None:
+        with open(self.file_name, 'a', encoding='UTF8') as f:
+            # see if data is one-dimensional
+            assert len(self.data_buffer.shape) == 2, "Data to append should be 2D"
+            np.savetxt(f, self.data_buffer, fmt='%s', delimiter=',')
+
+        if reset_buffer:
+            self.empty_buffer()
+
+    def empty_buffer(self) -> None:
+        pass
+        # self.buffer = np.empty((0, len(self.header)))
 
     def file_name_exists(self):
-        return os.path.isfile(self.file_name)
+        return os.path.exists(self.file_name)
 
-    def _append_to_txt(self, data):
-        with open(self.file_name, 'a', encoding='UTF8') as f:
-            f.truncate(0)
-            np.savetxt(f, data)
+    def _append_to_buffer(self, data:np.ndarray):
+        self.data_buffer = np.vstack((self.data_buffer, data))
 
-    def _create_txt(self):
+    def _create_file(self):
         with open(self.file_name, 'w', encoding='UTF8') as f:
-            f.write(self.header)
+            f.write(','.join(self.header))
+            f.write('\n')
             f.close()
 
 def make_buffer(header: list, buffer_size: int) -> np.ndarray:

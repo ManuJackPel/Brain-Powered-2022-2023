@@ -1,12 +1,10 @@
 TODO
-	saving_refresh_rate should be a attribute of recorder, 
-	add verbosity to recorder
-	inlet should be saved to buffer, and saved when buffer is full 
-	recorder should add header to top of file
+	add a buffer for recording
+	make it so you append to recorder 
+	but then need to save
+	append to recorder doesn't yet save
 
 
 DONE
 
 FUTURE
-	test that update_buffer works
-	turn whole get directory into a function
