@@ -26,6 +26,7 @@ def datastream(vis_in, eye_in):
     while True:
         start = time.time()
         sample, timestamp = eeg_stream.pull_sample()
+        print(sample)
         combined_array = np.array([timestamp] + sample)
         data_buffer = update_buffer(data_buffer, combined_array)
 
