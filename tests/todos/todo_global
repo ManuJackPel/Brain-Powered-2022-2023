@@ -1,15 +1,10 @@
 TODO
-	Finish & Test Feature Extractor
-	Setup Training Datasets From GIPSA-lab
-	Fix Plot Display
-
-
-Future Implementations
-	Run multiple classifiers in parallel
-	Add verbosity to builders
-	K-fold cross validation
-
+	run alpha task in parallel to tasks
+	add a row for the condition 
+	prompt a user if they want to remove an already existing file
+	
+	get recording to work 
 
 DONE
-	Finish & Test Preprocessor
 
+FUTURE
