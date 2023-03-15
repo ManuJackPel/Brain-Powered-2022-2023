@@ -1,0 +1,84 @@
+2.3772 	WARNING 	Speech-to-text recognition module for PocketSphinx is not available (use command `pip install SpeechRecognition` to get it). Transcription will be unavailable using that service this session.
+2.3785 	WARNING 	Speech-to-text recognition using Google online services is not available (use command `pip install google-api-core google-auth google-cloud google-cloud-speech googleapis-common-protos` to get it). Transcription will be unavailable using that service this session.
+3.1493 	WARNING 	We strongly recommend you activate the PTB sound engine in PsychoPy prefs as the preferred audio engine. Its timing is vastly superior. Your prefs are currently set to use ['pyo', 'pygame', 'sounddevice'] (in that order).
+3.3729 	WARNING 	Monitor specification not found. Creating a temporary one...
+11.0667 	EXP 	Created window1 = Window(allowGUI=True, allowStencil=False, autoLog=True, backendConf=UNKNOWN, backgroundFit=<method-wrapper '__getattribute__' of attributeSetter object at 0x000001D7A345D3D0>, backgroundImage=<method-wrapper '__getattribute__' of attributeSetter object at 0x000001D7A345D370>, bitsMode=UNKNOWN, blendMode='avg', bpc=(8, 8, 8), color=array([-1., -1., -1.]), colorSpace='rgb', depthBits=8, fullscr=<method-wrapper '__getattribute__' of attributeSetter object at 0x000001D7A345D0A0>, gamma=None, gammaErrorPolicy='raise', lms=UNKNOWN, monitor=<psychopy.monitors.calibTools.Monitor object at 0x000001D7A43F7100>, multiSample=False, name='window1', numSamples=2, pos=(0, 0), screen=0, size=array([1920, 1080]), stencilBits=0, stereo=False, units='height', useFBO=True, useRetina=False, viewOri=0.0, viewPos=None, viewScale=None, waitBlanking=True, winType='pyglet')
+11.0669 	EXP 	window1: mouseVisible = True
+11.0669 	EXP 	window1: backgroundImage = None
+11.0669 	EXP 	window1: backgroundFit = 'cover'
+11.0671 	EXP 	window1: mouseVisible = False
+11.0671 	EXP 	window1: Attempting to measure frame rate of screen (0) ...
+11.0671 	EXP 	window1: recordFrameIntervals = False
+11.2341 	EXP 	window1: recordFrameIntervals = True
+11.4166 	EXP 	Screen (0) actual frame rate measured at 59.92Hz
+11.4167 	EXP 	window1: recordFrameIntervals = False
+15.9675 	EXP 	Created text = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.04, italic=False, languageStyle='LTR', name='text', opacity=1.0, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text=str(...), units='height', win=Window(...), wrapWidth=0.9)
+16.2633 	EXP 	Created een_kort = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.5, italic=False, languageStyle='LTR', name='een_kort', opacity=1.0, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text='1', units='height', win=Window(...), wrapWidth=1)
+16.2847 	EXP 	Created twee_kort = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=-1.0, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.5, italic=False, languageStyle='LTR', name='twee_kort', opacity=1.0, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text='2', units='height', win=Window(...), wrapWidth=1)
+16.3060 	EXP 	Created drie_kort = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=-2.0, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.5, italic=False, languageStyle='LTR', name='drie_kort', opacity=1.0, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text='3', units='height', win=Window(...), wrapWidth=1)
+16.3419 	EXP 	Created text_2 = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([ 1., -1., -1.]), colorSpace='rgb', contrast=1.0, depth=-3.0, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.1, italic=False, languageStyle='LTR', name='text_2', opacity=1.0, ori=0.0, pos=array([0.  , 0.35]), rgb=UNKNOWN, text='Tijd tot je je ogen moet fixeren:', units='height', win=Window(...), wrapWidth=1)
+16.3481 	EXP 	Created een = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=-1.0, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.5, italic=False, languageStyle='LTR', name='een', opacity=1.0, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text='1', units='height', win=Window(...), wrapWidth=1)
+16.3538 	EXP 	Created twee = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=-2.0, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.5, italic=False, languageStyle='LTR', name='twee', opacity=1.0, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text='2', units='height', win=Window(...), wrapWidth=1)
+16.3600 	EXP 	Created drie = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=-3.0, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.5, italic=False, languageStyle='LTR', name='drie', opacity=1.0, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text='3', units='height', win=Window(...), wrapWidth=1)
+16.3788 	EXP 	Created vier = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=-4.0, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.5, italic=False, languageStyle='LTR', name='vier', opacity=1.0, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text='4', units='height', win=Window(...), wrapWidth=1)
+16.3983 	EXP 	Created vijf = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=-5.0, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.5, italic=False, languageStyle='LTR', name='vijf', opacity=1.0, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text='5', units='height', win=Window(...), wrapWidth=1)
+16.4169 	EXP 	Created zes = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=-6.0, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.5, italic=False, languageStyle='LTR', name='zes', opacity=1.0, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text='6', units='height', win=Window(...), wrapWidth=1)
+16.4362 	EXP 	Created zeven = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=-7.0, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.5, italic=False, languageStyle='LTR', name='zeven', opacity=1.0, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text='7', units='height', win=Window(...), wrapWidth=1)
+16.4560 	EXP 	Created acht = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=-8.0, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.5, italic=False, languageStyle='LTR', name='acht', opacity=1.0, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text='8', units='height', win=Window(...), wrapWidth=1)
+16.4774 	EXP 	Created negen = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=-9.0, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.5, italic=False, languageStyle='LTR', name='negen', opacity=1.0, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text='9', units='height', win=Window(...), wrapWidth=1)
+16.4967 	EXP 	Created tien = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=-10.0, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.5, italic=False, languageStyle='LTR', name='tien', opacity=1.0, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text='10', units='height', win=Window(...), wrapWidth=1)
+16.5726 	EXP 	Created fixatiekruis = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([ 1., -1., -1.]), colorSpace='rgb', contrast=1.0, depth=-11.0, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.25, italic=False, languageStyle='LTR', name='fixatiekruis', opacity=1.0, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text='+', units='height', win=Window(...), wrapWidth=1)
+17.0530 	EXP 	Sound bruh set volume 1.000
+17.0666 	EXP 	Created text_4 = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.05, italic=False, languageStyle='LTR', name='text_4', opacity=1.0, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text='k', units='height', win=Window(...), wrapWidth=1)
+17.0981 	EXP 	Created text_3 = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.05, italic=False, languageStyle='LTR', name='text_3', opacity=1.0, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text=str(...), units='height', win=Window(...), wrapWidth=1)
+17.1094 	EXP 	Created bedanktdoei = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.05, italic=False, languageStyle='LTR', name='bedanktdoei', opacity=1.0, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text=str(...), units='height', win=Window(...), wrapWidth=1)
+17.1372 	EXP 	text: autoDraw = True
+20.1111 	EXP 	Created sequence: sequential, trialTypes=1, nReps=10, seed=None
+20.1115 	EXP 	New trial (rep=0, index=0): None
+20.1247 	DATA 	Keypress: space
+20.1409 	EXP 	text: autoDraw = False
+20.1409 	EXP 	drie_kort: autoDraw = True
+20.1409 	EXP 	text_2: autoDraw = True
+21.1248 	EXP 	twee_kort: autoDraw = True
+21.1414 	EXP 	drie_kort: autoDraw = False
+22.1258 	EXP 	een_kort: autoDraw = True
+22.1258 	EXP 	twee_kort: autoDraw = False
+23.1270 	EXP 	een_kort: autoDraw = False
+23.1438 	EXP 	een_kort: autoDraw = False
+23.1438 	EXP 	twee_kort: autoDraw = False
+23.1438 	EXP 	drie_kort: autoDraw = False
+23.1438 	EXP 	text_2: autoDraw = False
+23.1438 	EXP 	een: autoDraw = True
+23.1438 	EXP 	fixatiekruis: autoDraw = True
+24.1115 	EXP 	twee: autoDraw = True
+24.1448 	EXP 	een: autoDraw = False
+25.1126 	EXP 	twee: autoDraw = False
+25.1126 	EXP 	drie: autoDraw = True
+26.1137 	EXP 	drie: autoDraw = False
+26.1137 	EXP 	vier: autoDraw = True
+27.1148 	EXP 	vier: autoDraw = False
+27.1148 	EXP 	vijf: autoDraw = True
+28.1159 	EXP 	vijf: autoDraw = False
+28.1159 	EXP 	zes: autoDraw = True
+29.1171 	EXP 	zes: autoDraw = False
+29.1171 	EXP 	zeven: autoDraw = True
+30.1180 	EXP 	zeven: autoDraw = False
+30.1180 	EXP 	acht: autoDraw = True
+31.1191 	EXP 	acht: autoDraw = False
+31.1191 	EXP 	negen: autoDraw = True
+32.1201 	EXP 	negen: autoDraw = False
+32.1201 	EXP 	tien: autoDraw = True
+33.1241 	EXP 	tien: autoDraw = False
+33.1409 	EXP 	een: autoDraw = False
+33.1409 	EXP 	twee: autoDraw = False
+33.1409 	EXP 	drie: autoDraw = False
+33.1409 	EXP 	vier: autoDraw = False
+33.1409 	EXP 	vijf: autoDraw = False
+33.1409 	EXP 	zes: autoDraw = False
+33.1409 	EXP 	zeven: autoDraw = False
+33.1409 	EXP 	acht: autoDraw = False
+33.1409 	EXP 	negen: autoDraw = False
+33.1409 	EXP 	tien: autoDraw = False
+33.1409 	EXP 	fixatiekruis: autoDraw = False
+33.6421 	DATA 	Keypress: escape
+34.4225 	EXP 	window1: mouseVisible = True
