@@ -26,7 +26,6 @@ def datastream(vis_in, eye_in):
     while True:
         start = time.time()
         sample, timestamp = eeg_stream.pull_sample()
-        print(sample)
         combined_array = np.array([timestamp] + sample)
         data_buffer = update_buffer(data_buffer, combined_array)
 
@@ -46,7 +45,7 @@ def data_vis(pipe_end):
 
         plt.cla()
         plt.xlim([data_buffer[0,0], data_buffer[-1,0]])
-        plt.ylim([-3,3])
+        plt.ylim([-0.1,0.1])
         line = plt.plot(time, channels, '--')
         return line,
 
