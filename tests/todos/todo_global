@@ -1,9 +1,9 @@
 TODO
-	run alpha task in parallel to tasks
-	add a row for the condition 
-	prompt a user if they want to remove an already existing file
-	
-	get recording to work 
+	add a buffer for recording
+	make it so you append to recorder 
+	but then need to save
+	append to recorder doesn't yet save
+
 
 DONE
 
