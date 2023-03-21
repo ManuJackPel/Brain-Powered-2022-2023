@@ -10,32 +10,49 @@ import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 import scipy.signal
 
-from _code.classes.recorder import make_buffer, update_buffer
+from _code.classes.recorder import make_buffer, update_buffer, Recorder
 from _code.classes.dataloader import MobiLab
 
 
-
-def data_stream(pipe_start):
+def data_stream(data_pipe_start, condition_pipe_end):
+    # Init LSL Inlet for MobiLab
     eeg_stream = MobiLab()
+    # Init Recorder
     header = ['time', 'CH1', 'CH2','CH3', 'CH4', 'CH5', 'CH6', 'CH7', 'CH8', 'CH9'] 
-    data_buffer = make_buffer(header, buffer_size=1024)
+    file_location = input("Insert file location")
+    recorder = Recorder(file_location, header)
+    # Init DataBuffer
+    vis_data_buffer = make_buffer(header, buffer_size=1024)
 
     start_time = time.time()
     while True:
+        # Pull Sample from MobiLab and Condition from alpha task
         sample, timestamp = eeg_stream.pull_sample()
-        combined_array = np.array([timestamp] + sample)
-        data_buffer = update_buffer(data_buffer, combined_array)
+        condition, participant = condition_pipe_end.recv()
 
+        # End recording if stop_threshold is reached
+        if 'stop_threshold' in condition:
+            print('saving the data')
+            recorder.save()
+
+        # Combine timestamp and channel data
+        combined_array = np.array([timestamp] + sample + [condition])
+        # Append to recorder
+        recorder.append_data(combined_array)
+        # Append to visualization buffer
+        vis_data_buffer = update_buffer(vis_data_buffer, combined_array)
+
+        # Save data and send data to visualization process every n seconds
         if time.time() - start_time >= 0.5:
             start_time = time.time()
-            pipe_start.send(data_buffer)
+            recorder.save()
+            data_pipe_start.send(vis_data_buffer)
 
 def data_visualization(pipe_end):
     def animate(i):
         data_buffer = pipe_end.recv()
         time = data_buffer[:,0]
         channels = data_buffer[:,[1,9]]
-        # print(time[-1])
 
         plt.cla()
         plt.xlim([data_buffer[0,0], data_buffer[-1,0]])
@@ -45,33 +62,25 @@ def data_visualization(pipe_end):
     ani = FuncAnimation(plt.gcf(), animate, interval=125)    
     plt.show()
 
-
+def get_alpha_task_condition(condition_pipe_start):
+    while True:
+        with open('dev_code\psychopy\condition.txt') as f:
+            condition_file = f.readlines()
+            condition = condition_file[0]
+            participant = condition_file[1]
+            # Send data to recorder
+            condition_pipe_start.send((condition, participant))
 
 if __name__ == "__main__":  
     # Init Pipeline, set duplex to False to make it unidirectional
-    conn1, conn2 = Pipe(duplex=False)
+    data_pipe_end, data_pipe_start = Pipe(duplex=False)
+    condition_pipe_end, condition_pipe_start = Pipe(duplex=False)
 
-    eeg_stream_process = Process(target = data_stream, args = (conn2,))
+    eeg_stream_process = Process(target = data_stream, args = (data_pipe_start, condition_pipe_end))
     eeg_stream_process.start()
 
-    visualization_process = Process(target = data_visualization, args = (conn1,))
+    visualization_process = Process(target = data_visualization, args = (data_pipe_end,))
     visualization_process.start()
 
-        # if len(received_data.shape) == 1:
-        #     raise Exception('Visualization does not work with 1D data')
-
-
-        # f, S = scipy.signal.periodogram(received_data, 512, scaling='density')
-        # plt.semilogy(f, S)
-        # plt.ylim([1e-7, 1e2])
-        # plt.xlim([0,100])
-        # plt.xlabel('frequency [Hz]')
-        # plt.ylabel('PSD [V**2/Hz]')
-        # plt.tight_layout()
-        # plt.cla()
-
-        # xs = np.arange(0, received_data.shape[0])
-        # plt.plot(xs, received_data[:,[0,-1]], '--', label='Channel 1')
-
-    # ani = FuncAnimation(plt.gcf(), animate, interval=125)    
-    # plt.show()
+    alpha_task_process = Process(target = get_alpha_task_condition, args = (condition_pipe_start,))
+    alpha_task_process.start()
