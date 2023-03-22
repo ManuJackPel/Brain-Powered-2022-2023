@@ -1,2 +1,7 @@
+<<<<<<< HEAD
 previous data has been saved
 no current participant
+=======
+saving the data
+Charlynn_5
+>>>>>>> a1844177c8d4ac17b0a2a6e29737c37916b290e6

@@ -34,6 +34,7 @@ def test_recorder_should_append_to_new_file():
     data = np.array([[1, 2, 3, 4, 'open'],
                      [5, 6, 7, 8, 'closed'] ])
     recorder.append_data(data)
+    recorder.save()
 
     # Import CSV of written file
     written_data = pd.read_csv(file_location)
@@ -41,6 +42,33 @@ def test_recorder_should_append_to_new_file():
     right_dataframe = pd.DataFrame(data=d)
 
     assert written_data.equals(right_dataframe)
+
+def test_recorder_buffer_should_match_appended_data():
+    recorder, file_location, header = init_recorder()
+    appended_data = np.array([
+        [1, 2, 3, 4, 'open'],
+        [5, 6, 7, 8, 'closed'] ])
+    
+    recorder.append_data(appended_data)
+    err_msg = "Appended data does not match the recorder buffer"
+
+    assert np.array_equal(recorder.data_buffer, appended_data) == True, err_msg
+
+def test_recorder_buffer_should_be_emptied_after_clear():
+    recorder, file_location, header = init_recorder()
+    appended_data = np.array([
+        [1, 2, 3, 4, 'open'],
+        [5, 6, 7, 8, 'closed'] ])
+    recorder.empty_buffer()
+
+    err_msg = "Recorder data_buffer was not cleared"
+    assert recorder.data_buffer.shape == (0,len(header))
+
+    shape_of_saved_data_before = pd.read_csv(file_location).shape
+    recorder.save()
+    shape_of_saved_data_after = pd.read_csv(file_location).shape
+    err_msg = "Data file somehow grew, even though no data was added to recorder"
+    assert shape_of_saved_data_before == shape_of_saved_data_after, err_msg
 
 def test_recorder_should_have_append_to_already_existing_file():
     recorder, file_location, header = init_recorder()
@@ -52,8 +80,9 @@ def test_recorder_should_have_append_to_already_existing_file():
 
     second_data = np.array([
         [9, 10, 11, 12, 'open'],
-        [13, 14, 15, 16, 'closed'] ])
+        [13, 14, 15, 16, 'closed']])
     recorder.append_data(second_data)
+    recorder.save()
 
     # Import CSV of written file
     written_data = pd.read_csv(file_location)
@@ -61,7 +90,9 @@ def test_recorder_should_have_append_to_already_existing_file():
          'CH3' : [4,8,12,16], 'condition': ['open', 'closed', 'open', 'closed']}
 
     right_dataframe = pd.DataFrame(data=d)
+    assert written_data.equals(right_dataframe)
 
 
-def test_recorder_should_prompt_user_if_file_already_exists():
-    pass
+
+
+
