@@ -11,15 +11,15 @@ from matplotlib.animation import FuncAnimation
 import scipy.signal
 
 from _code.classes.recorder import make_buffer, update_buffer, Recorder
-from _code.classes.dataloader import MobiLab
+from _code.classes.dataloader import DataStream
 
 
 def data_stream(data_pipe_start, condition_pipe_end):
     # Init LSL Inlet for MobiLab
-    eeg_stream = MobiLab()
+    eeg_stream = DataStream('sinewave')
     # Init Recorder
-    header = ['time', 'CH1', 'CH2','CH3', 'CH4', 'CH5', 'CH6', 'CH7', 'CH8', 'CH9'] 
-    file_location = input("Insert file location")
+    header = ['time', 'CH1', 'CH2','CH3', 'CH4', 'CH5', 'CH6', 'CH7', 'CH8', 'CH9', 'condition'] 
+    file_location = '/home/kibble/Documents/School/Brain Powered/Brain-Powered-2022-2023/data/testing/testing_data_9.csv'
     recorder = Recorder(file_location, header)
     # Init DataBuffer
     vis_data_buffer = make_buffer(header, buffer_size=1024)
@@ -32,8 +32,8 @@ def data_stream(data_pipe_start, condition_pipe_end):
 
         # End recording if stop_threshold is reached
         if 'stop_threshold' in condition:
-            print('saving the data')
-            recorder.save()
+            print('STOP TASK')
+            
 
         # Combine timestamp and channel data
         combined_array = np.array([timestamp] + sample + [condition])
@@ -67,8 +67,7 @@ def get_alpha_task_condition(condition_pipe_start):
         with open('dev_code\psychopy\condition.txt') as f:
             condition_file = f.readlines()
             condition = condition_file[0]
-            participant = condition_file[1]
-            # Send data to recorder
+            participant = condition_file[1] # Send data to recorder
             condition_pipe_start.send((condition, participant))
 
 if __name__ == "__main__":  
