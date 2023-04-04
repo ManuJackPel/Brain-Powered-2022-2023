@@ -9,83 +9,59 @@ import multiprocessing
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 import scipy.signal
+from functools import partial
 
 from _code.classes.recorder import make_buffer, update_buffer, Recorder
 from _code.classes.dataloader import DataStream
 
 
-def data_stream(recorder, data_pipe_start, condition_pipe_end):
+def data_stream(stream_object, recorder_pipe_start, visualizer_pipe_start, condition_pipe_end):
     while True:
-        # Pull sample
         # Check stop condition
-        # Combine array
-        # Send data to recorder
-        # Send data to visualizer
-        pass
-
-def record_data_stream(recorder):
-    # start timer
-    # get stream data
-    # get condition data
-    # append to recorder
-    # save every n seconds
-    pass
-    
-def data_visualization(recorder):
-    # make timer
-    # make buffer
-    # get stream data
-    # get condition data
-    # update buffer
-    # update plot every n seconds
-    pass
-
-def data_stream(data_pipe_start, condition_pipe_end):
-    # Init LSL Inlet for MobiLab
-
-    # Init DataBuffer
-    vis_data_buffer = make_buffer(header, buffer_size=1024)
-
-    start_time = time.time()
-    while True:
-        # Pull Sample from MobiLab and Condition from alpha task
-        sample, timestamp = eeg_stream.pull_sample()
-        condition, participant = condition_pipe_end.recv()
-
-        # End recording if stop_threshold is reached
         if 'stop_threshold' in condition:
             print('STOP TASK')
-            
-
-        # Combine timestamp and channel data
+        # Pull sample
+        sample, timestamp = stream_object.pull_sample()
+        # Combine into immutable array
         combined_array = np.array([timestamp] + sample + [condition])
-        # Append to recorder
-        recorder.append_data(combined_array)
-        # Append to visualization buffer
-        vis_data_buffer = update_buffer(vis_data_buffer, combined_array)
+        combined_array.setflags(write=False)
+        # Send data to recorder
+        recorder_pipe_start.send(combined_array)
+        # Send data to visualizer 
+        visualizer_pipe_start.send(combined_array)
 
-        # Save data and send data to visualization process every n seconds
+def record_data_stream(recorder, recorder_pipe_end):
+    # Start timer
+    start_time = time.time()
+    while True:
+        # Get stream data
+        combined_array = recorder_pipe_end.recv()
+        # Append to recorder
+        recorder.append(combined_array)
+        # Save every n seconds
         if time.time() - start_time >= 0.5:
             start_time = time.time()
             recorder.save()
-            data_pipe_start.send(vis_data_buffer)
+    
+def data_visualization(visualizer_pipe_end, header):
+    # Make buffer
+    vis_data_buffer = make_buffer(header, buffer_size=1024)
 
-def data_visualization(pipe_end):
-    pass
-    data_buffer = pipe_end.recv()
+    def animate(i, buffer):
+        # Get vis data buffer from outside the function
+        global vis_data_buffer
+        vis_data_buffer = update_buffer(vis_data_buffer, visualizer_pipe_end.recv())
+        # Obtain Channels
+        time = buffer[:,0]
+        channels = buffer[:,[1,9]]
+        # Plot parameters
+        plt.cla()
+        plt.xlim([buffer[0,0], buffer[-1,0]])
+        plt.ylim([-3,3]) 
+        plt.plot(time, channels, '--') 
 
-    # def animate(i):
-    #     data_buffer = pipe_end.recv()
-    #     time = data_buffer[:,0]
-    #     channels = data_buffer[:,[1,9]]
-
-    #     plt.cla()
-    #     plt.xlim([data_buffer[0,0], data_buffer[-1,0]])
-    #     plt.ylim([-3,3])
-    #     plt.plot(time, channels, '--')
-
-    # ani = FuncAnimation(plt.gcf(), animate, interval=125)    
-    # plt.show()
+    ani = FuncAnimation(plt.gcf(), animate, interval=500)    
+    plt.show()
 
 def get_alpha_task_condition(condition_pipe_start):
     pass
