@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2022.2.5),
-    on March 06, 2023, at 16:34
+    on April 04, 2023, at 21:45
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -14,8 +14,9 @@ If you publish work using this script the most relevant publication is:
 # --- Import packages ---
 from psychopy import locale_setup
 from psychopy import prefs
-prefs.hardware['audioLib'] = ['pyo', 'pygame', 'sounddevice']
-from psychopy import sound, gui, visual, core, data, event, logging, clock, colors#, layout
+prefs.hardware['audioLib'] = 'sounddevice'
+prefs.hardware['audioLatencyMode'] = '1'
+from psychopy import sound, gui, visual, core, data, event, logging, clock, colors, layout
 from psychopy.constants import (NOT_STARTED, STARTED, PLAYING, PAUSED,
                                 STOPPED, FINISHED, PRESSED, RELEASED, FOREVER)
 
@@ -29,12 +30,10 @@ import sys  # to get file system encoding
 import psychopy.iohub as io
 from psychopy.hardware import keyboard
 
-from pathlib import Path
-
-#MAKE DIRECTORY STRING, BASED ON CURRENT WORKING DIRECTORY AN FORMAT WITH CORRECT FORWARD SLASHES
-bruhdirectory = Path(os.getcwd(), r"Assets\\bruh.wav")
-alpha_task_directory = Path(os.getcwd(), r"Psychopy\\alpha_threshold.py")
-print(bruhdirectory.as_posix)
+# Run 'Before Experiment' code from waiting
+f = open("condition.txt", "w")
+f.write('waiting')
+f.close()
 
 
 # Ensure that relative paths start from the same directory as this script
@@ -46,6 +45,9 @@ expName = 'alpha_threshold'  # from the Builder filename that created this scrip
 expInfo = {
     'participant': 'voer hier een getal in',
 }
+
+
+
 # --- Show participant info dialog --
 dlg = gui.DlgFromDict(dictionary=expInfo, sortKeys=False, title=expName)
 if dlg.OK == False:
@@ -54,13 +56,18 @@ expInfo['date'] = data.getDateStr()  # add a simple timestamp
 expInfo['expName'] = expName
 expInfo['psychopyVersion'] = psychopyVersion
 
+
+
 # Data file name stem = absolute path + name; later add .psyexp, .csv, .log, etc
 filename = _thisDir + os.sep + u'data/%s_%s_%s' % (expInfo['participant'], expName, expInfo['date'])
+
+print(expInfo['participant'])
+participant = expInfo['participant']
 
 # An ExperimentHandler isn't essential but helps with data saving
 thisExp = data.ExperimentHandler(name=expName, version='',
     extraInfo=expInfo, runtimeInfo=None,
-    originPath= alpha_task_directory.as_posix,
+    originPath='C:\\Users\\david\\Documents\\python scripts\\Brain-Powered-2022-2023\\dev_code\\psychopy\\alpha_threshold.py',
     savePickle=True, saveWideText=True,
     dataFileName=filename)
 # save a log file for detail verbose info
@@ -142,97 +149,18 @@ text_2 = visual.TextStim(win=win, name='text_2',
     depth=-3.0);
 
 # --- Initialize components for Routine "countdown" ---
-een = visual.TextStim(win=win, name='een',
-    text='1',
-    font='Open Sans',
-    pos=(0, 0), height=0.5, wrapWidth=None, ori=0.0, 
-    color='white', colorSpace='rgb', opacity=None, 
-    languageStyle='LTR',
-    depth=-1.0);
-twee = visual.TextStim(win=win, name='twee',
-    text='2',
-    font='Open Sans',
-    pos=(0, 0), height=0.5, wrapWidth=None, ori=0.0, 
-    color='white', colorSpace='rgb', opacity=None, 
-    languageStyle='LTR',
-    depth=-2.0);
-drie = visual.TextStim(win=win, name='drie',
-    text='3',
-    font='Open Sans',
-    pos=(0, 0), height=0.5, wrapWidth=None, ori=0.0, 
-    color='white', colorSpace='rgb', opacity=None, 
-    languageStyle='LTR',
-    depth=-3.0);
-vier = visual.TextStim(win=win, name='vier',
-    text='4',
-    font='Open Sans',
-    pos=(0, 0), height=0.5, wrapWidth=None, ori=0.0, 
-    color='white', colorSpace='rgb', opacity=None, 
-    languageStyle='LTR',
-    depth=-4.0);
-vijf = visual.TextStim(win=win, name='vijf',
-    text='5',
-    font='Open Sans',
-    pos=(0, 0), height=0.5, wrapWidth=None, ori=0.0, 
-    color='white', colorSpace='rgb', opacity=None, 
-    languageStyle='LTR',
-    depth=-5.0);
-zes = visual.TextStim(win=win, name='zes',
-    text='6',
-    font='Open Sans',
-    pos=(0, 0), height=0.5, wrapWidth=None, ori=0.0, 
-    color='white', colorSpace='rgb', opacity=None, 
-    languageStyle='LTR',
-    depth=-6.0);
-zeven = visual.TextStim(win=win, name='zeven',
-    text='7',
-    font='Open Sans',
-    pos=(0, 0), height=0.5, wrapWidth=None, ori=0.0, 
-    color='white', colorSpace='rgb', opacity=None, 
-    languageStyle='LTR',
-    depth=-7.0);
-acht = visual.TextStim(win=win, name='acht',
-    text='8',
-    font='Open Sans',
-    pos=(0, 0), height=0.5, wrapWidth=None, ori=0.0, 
-    color='white', colorSpace='rgb', opacity=None, 
-    languageStyle='LTR',
-    depth=-8.0);
-negen = visual.TextStim(win=win, name='negen',
-    text='9',
-    font='Open Sans',
-    pos=(0, 0), height=0.5, wrapWidth=None, ori=0.0, 
-    color='white', colorSpace='rgb', opacity=None, 
-    languageStyle='LTR',
-    depth=-9.0);
-tien = visual.TextStim(win=win, name='tien',
-    text='10',
-    font='Open Sans',
-    pos=(0, 0), height=0.5, wrapWidth=None, ori=0.0, 
-    color='white', colorSpace='rgb', opacity=None, 
-    languageStyle='LTR',
-    depth=-10.0);
 fixatiekruis = visual.TextStim(win=win, name='fixatiekruis',
     text='+',
     font='Open Sans',
     pos=(0, 0), height=0.25, wrapWidth=None, ori=0.0, 
     color=[1.0000, -1.0000, -1.0000], colorSpace='rgb', opacity=None, 
     languageStyle='LTR',
-    depth=-11.0);
+    depth=-1.0);
 
 # --- Initialize components for Routine "ogen_dicht" ---
-bruh = sound.Sound(bruhdirectory.as_posix, secs=1.0, stereo=True, hamming=True,
+bruh = sound.Sound('C:/Users/david/Documents/python scripts/Brain-Powered-2022-2023-main/Assets/bruh.wav', secs=1.0, stereo=True, hamming=True,
     name='bruh')
 bruh.setVolume(1.0)
-
-# --- Initialize components for Routine "leegte" ---
-text_4 = visual.TextStim(win=win, name='text_4',
-    text='k',
-    font='Open Sans',
-    pos=(0, 0), height=0.05, wrapWidth=None, ori=0.0, 
-    color='white', colorSpace='rgb', opacity=None, 
-    languageStyle='LTR',
-    depth=0.0);
 
 # --- Initialize components for Routine "lekker_pik" ---
 text_3 = visual.TextStim(win=win, name='text_3',
@@ -266,10 +194,8 @@ key_resp.keys = []
 key_resp.rt = []
 _key_resp_allKeys = []
 # Run 'Begin Routine' code from start_threshold
-print(expInfo['participant'])
-print('start')
 f = open("condition.txt", "w")
-f.writelines(["start_threshold\n", expInfo['participant']])
+f.writelines(["start_threshold\n", participant])
 f.close()
 # keep track of which components have finished
 UitlegComponents = [text, key_resp]
@@ -521,10 +447,10 @@ for thisCountdownlioop in countdownlioop:
     # update component parameters for each repeat
     # Run 'Begin Routine' code from open_condition
     f = open("condition.txt", "w")
-    f.writelines(["open\n", expInfo['participant']])
+    f.writelines(["open\n", participant])
     f.close()
     # keep track of which components have finished
-    countdownComponents = [een, twee, drie, vier, vijf, zes, zeven, acht, negen, tien, fixatiekruis]
+    countdownComponents = [fixatiekruis]
     for thisComponent in countdownComponents:
         thisComponent.tStart = None
         thisComponent.tStop = None
@@ -545,206 +471,6 @@ for thisCountdownlioop in countdownlioop:
         tThisFlipGlobal = win.getFutureFlipTime(clock=None)
         frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
         # update/draw components on each frame
-        
-        # *een* updates
-        if een.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
-            # keep track of start time/frame for later
-            een.frameNStart = frameN  # exact frame index
-            een.tStart = t  # local t and not account for scr refresh
-            een.tStartRefresh = tThisFlipGlobal  # on global time
-            win.timeOnFlip(een, 'tStartRefresh')  # time at next scr refresh
-            # add timestamp to datafile
-            thisExp.timestampOnFlip(win, 'een.started')
-            een.setAutoDraw(True)
-        if een.status == STARTED:
-            # is it time to stop? (based on global clock, using actual start)
-            if tThisFlipGlobal > een.tStartRefresh + 1.0-frameTolerance:
-                # keep track of stop time/frame for later
-                een.tStop = t  # not accounting for scr refresh
-                een.frameNStop = frameN  # exact frame index
-                # add timestamp to datafile
-                thisExp.timestampOnFlip(win, 'een.stopped')
-                een.setAutoDraw(False)
-        
-        # *twee* updates
-        if twee.status == NOT_STARTED and tThisFlip >= 1-frameTolerance:
-            # keep track of start time/frame for later
-            twee.frameNStart = frameN  # exact frame index
-            twee.tStart = t  # local t and not account for scr refresh
-            twee.tStartRefresh = tThisFlipGlobal  # on global time
-            win.timeOnFlip(twee, 'tStartRefresh')  # time at next scr refresh
-            # add timestamp to datafile
-            thisExp.timestampOnFlip(win, 'twee.started')
-            twee.setAutoDraw(True)
-        if twee.status == STARTED:
-            # is it time to stop? (based on global clock, using actual start)
-            if tThisFlipGlobal > twee.tStartRefresh + 1.0-frameTolerance:
-                # keep track of stop time/frame for later
-                twee.tStop = t  # not accounting for scr refresh
-                twee.frameNStop = frameN  # exact frame index
-                # add timestamp to datafile
-                thisExp.timestampOnFlip(win, 'twee.stopped')
-                twee.setAutoDraw(False)
-        
-        # *drie* updates
-        if drie.status == NOT_STARTED and tThisFlip >= 2-frameTolerance:
-            # keep track of start time/frame for later
-            drie.frameNStart = frameN  # exact frame index
-            drie.tStart = t  # local t and not account for scr refresh
-            drie.tStartRefresh = tThisFlipGlobal  # on global time
-            win.timeOnFlip(drie, 'tStartRefresh')  # time at next scr refresh
-            # add timestamp to datafile
-            thisExp.timestampOnFlip(win, 'drie.started')
-            drie.setAutoDraw(True)
-        if drie.status == STARTED:
-            # is it time to stop? (based on global clock, using actual start)
-            if tThisFlipGlobal > drie.tStartRefresh + 1.0-frameTolerance:
-                # keep track of stop time/frame for later
-                drie.tStop = t  # not accounting for scr refresh
-                drie.frameNStop = frameN  # exact frame index
-                # add timestamp to datafile
-                thisExp.timestampOnFlip(win, 'drie.stopped')
-                drie.setAutoDraw(False)
-        
-        # *vier* updates
-        if vier.status == NOT_STARTED and tThisFlip >= 3-frameTolerance:
-            # keep track of start time/frame for later
-            vier.frameNStart = frameN  # exact frame index
-            vier.tStart = t  # local t and not account for scr refresh
-            vier.tStartRefresh = tThisFlipGlobal  # on global time
-            win.timeOnFlip(vier, 'tStartRefresh')  # time at next scr refresh
-            # add timestamp to datafile
-            thisExp.timestampOnFlip(win, 'vier.started')
-            vier.setAutoDraw(True)
-        if vier.status == STARTED:
-            # is it time to stop? (based on global clock, using actual start)
-            if tThisFlipGlobal > vier.tStartRefresh + 1.0-frameTolerance:
-                # keep track of stop time/frame for later
-                vier.tStop = t  # not accounting for scr refresh
-                vier.frameNStop = frameN  # exact frame index
-                # add timestamp to datafile
-                thisExp.timestampOnFlip(win, 'vier.stopped')
-                vier.setAutoDraw(False)
-        
-        # *vijf* updates
-        if vijf.status == NOT_STARTED and tThisFlip >= 4-frameTolerance:
-            # keep track of start time/frame for later
-            vijf.frameNStart = frameN  # exact frame index
-            vijf.tStart = t  # local t and not account for scr refresh
-            vijf.tStartRefresh = tThisFlipGlobal  # on global time
-            win.timeOnFlip(vijf, 'tStartRefresh')  # time at next scr refresh
-            # add timestamp to datafile
-            thisExp.timestampOnFlip(win, 'vijf.started')
-            vijf.setAutoDraw(True)
-        if vijf.status == STARTED:
-            # is it time to stop? (based on global clock, using actual start)
-            if tThisFlipGlobal > vijf.tStartRefresh + 1.0-frameTolerance:
-                # keep track of stop time/frame for later
-                vijf.tStop = t  # not accounting for scr refresh
-                vijf.frameNStop = frameN  # exact frame index
-                # add timestamp to datafile
-                thisExp.timestampOnFlip(win, 'vijf.stopped')
-                vijf.setAutoDraw(False)
-        
-        # *zes* updates
-        if zes.status == NOT_STARTED and tThisFlip >= 5-frameTolerance:
-            # keep track of start time/frame for later
-            zes.frameNStart = frameN  # exact frame index
-            zes.tStart = t  # local t and not account for scr refresh
-            zes.tStartRefresh = tThisFlipGlobal  # on global time
-            win.timeOnFlip(zes, 'tStartRefresh')  # time at next scr refresh
-            # add timestamp to datafile
-            thisExp.timestampOnFlip(win, 'zes.started')
-            zes.setAutoDraw(True)
-        if zes.status == STARTED:
-            # is it time to stop? (based on global clock, using actual start)
-            if tThisFlipGlobal > zes.tStartRefresh + 1.0-frameTolerance:
-                # keep track of stop time/frame for later
-                zes.tStop = t  # not accounting for scr refresh
-                zes.frameNStop = frameN  # exact frame index
-                # add timestamp to datafile
-                thisExp.timestampOnFlip(win, 'zes.stopped')
-                zes.setAutoDraw(False)
-        
-        # *zeven* updates
-        if zeven.status == NOT_STARTED and tThisFlip >= 6-frameTolerance:
-            # keep track of start time/frame for later
-            zeven.frameNStart = frameN  # exact frame index
-            zeven.tStart = t  # local t and not account for scr refresh
-            zeven.tStartRefresh = tThisFlipGlobal  # on global time
-            win.timeOnFlip(zeven, 'tStartRefresh')  # time at next scr refresh
-            # add timestamp to datafile
-            thisExp.timestampOnFlip(win, 'zeven.started')
-            zeven.setAutoDraw(True)
-        if zeven.status == STARTED:
-            # is it time to stop? (based on global clock, using actual start)
-            if tThisFlipGlobal > zeven.tStartRefresh + 1.0-frameTolerance:
-                # keep track of stop time/frame for later
-                zeven.tStop = t  # not accounting for scr refresh
-                zeven.frameNStop = frameN  # exact frame index
-                # add timestamp to datafile
-                thisExp.timestampOnFlip(win, 'zeven.stopped')
-                zeven.setAutoDraw(False)
-        
-        # *acht* updates
-        if acht.status == NOT_STARTED and tThisFlip >= 7-frameTolerance:
-            # keep track of start time/frame for later
-            acht.frameNStart = frameN  # exact frame index
-            acht.tStart = t  # local t and not account for scr refresh
-            acht.tStartRefresh = tThisFlipGlobal  # on global time
-            win.timeOnFlip(acht, 'tStartRefresh')  # time at next scr refresh
-            # add timestamp to datafile
-            thisExp.timestampOnFlip(win, 'acht.started')
-            acht.setAutoDraw(True)
-        if acht.status == STARTED:
-            # is it time to stop? (based on global clock, using actual start)
-            if tThisFlipGlobal > acht.tStartRefresh + 1.0-frameTolerance:
-                # keep track of stop time/frame for later
-                acht.tStop = t  # not accounting for scr refresh
-                acht.frameNStop = frameN  # exact frame index
-                # add timestamp to datafile
-                thisExp.timestampOnFlip(win, 'acht.stopped')
-                acht.setAutoDraw(False)
-        
-        # *negen* updates
-        if negen.status == NOT_STARTED and tThisFlip >= 8-frameTolerance:
-            # keep track of start time/frame for later
-            negen.frameNStart = frameN  # exact frame index
-            negen.tStart = t  # local t and not account for scr refresh
-            negen.tStartRefresh = tThisFlipGlobal  # on global time
-            win.timeOnFlip(negen, 'tStartRefresh')  # time at next scr refresh
-            # add timestamp to datafile
-            thisExp.timestampOnFlip(win, 'negen.started')
-            negen.setAutoDraw(True)
-        if negen.status == STARTED:
-            # is it time to stop? (based on global clock, using actual start)
-            if tThisFlipGlobal > negen.tStartRefresh + 1.0-frameTolerance:
-                # keep track of stop time/frame for later
-                negen.tStop = t  # not accounting for scr refresh
-                negen.frameNStop = frameN  # exact frame index
-                # add timestamp to datafile
-                thisExp.timestampOnFlip(win, 'negen.stopped')
-                negen.setAutoDraw(False)
-        
-        # *tien* updates
-        if tien.status == NOT_STARTED and tThisFlip >= 9-frameTolerance:
-            # keep track of start time/frame for later
-            tien.frameNStart = frameN  # exact frame index
-            tien.tStart = t  # local t and not account for scr refresh
-            tien.tStartRefresh = tThisFlipGlobal  # on global time
-            win.timeOnFlip(tien, 'tStartRefresh')  # time at next scr refresh
-            # add timestamp to datafile
-            thisExp.timestampOnFlip(win, 'tien.started')
-            tien.setAutoDraw(True)
-        if tien.status == STARTED:
-            # is it time to stop? (based on global clock, using actual start)
-            if tThisFlipGlobal > tien.tStartRefresh + 1.0-frameTolerance:
-                # keep track of stop time/frame for later
-                tien.tStop = t  # not accounting for scr refresh
-                tien.frameNStop = frameN  # exact frame index
-                # add timestamp to datafile
-                thisExp.timestampOnFlip(win, 'tien.stopped')
-                tien.setAutoDraw(False)
         
         # *fixatiekruis* updates
         if fixatiekruis.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
@@ -798,11 +524,11 @@ for thisCountdownlioop in countdownlioop:
     continueRoutine = True
     routineForceEnded = False
     # update component parameters for each repeat
-    bruh.setSound(bruhdirectory.as_posix, secs=1.0, hamming=True)
+    bruh.setSound('C:/Users/david/Documents/python scripts/Brain-Powered-2022-2023-main/Assets/bruh.wav', secs=1.0, hamming=True)
     bruh.setVolume(1.0, log=False)
     # Run 'Begin Routine' code from closed_condition
     f = open("condition.txt", "w")
-    f.writelines(["closed\n", expInfo['participant']])
+    f.writelines(["closed\n", participant])
     f.close()
     # keep track of which components have finished
     ogen_dichtComponents = [bruh]
@@ -873,81 +599,6 @@ for thisCountdownlioop in countdownlioop:
         routineTimer.reset()
     else:
         routineTimer.addTime(-11.000000)
-    
-    # --- Prepare to start Routine "leegte" ---
-    continueRoutine = True
-    routineForceEnded = False
-    # update component parameters for each repeat
-    # keep track of which components have finished
-    leegteComponents = [text_4]
-    for thisComponent in leegteComponents:
-        thisComponent.tStart = None
-        thisComponent.tStop = None
-        thisComponent.tStartRefresh = None
-        thisComponent.tStopRefresh = None
-        if hasattr(thisComponent, 'status'):
-            thisComponent.status = NOT_STARTED
-    # reset timers
-    t = 0
-    _timeToFirstFrame = win.getFutureFlipTime(clock="now")
-    frameN = -1
-    
-    # --- Run Routine "leegte" ---
-    while continueRoutine and routineTimer.getTime() < 1.0:
-        # get current time
-        t = routineTimer.getTime()
-        tThisFlip = win.getFutureFlipTime(clock=routineTimer)
-        tThisFlipGlobal = win.getFutureFlipTime(clock=None)
-        frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
-        # update/draw components on each frame
-        
-        # *text_4* updates
-        if text_4.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
-            # keep track of start time/frame for later
-            text_4.frameNStart = frameN  # exact frame index
-            text_4.tStart = t  # local t and not account for scr refresh
-            text_4.tStartRefresh = tThisFlipGlobal  # on global time
-            win.timeOnFlip(text_4, 'tStartRefresh')  # time at next scr refresh
-            # add timestamp to datafile
-            thisExp.timestampOnFlip(win, 'text_4.started')
-            text_4.setAutoDraw(True)
-        if text_4.status == STARTED:
-            # is it time to stop? (based on global clock, using actual start)
-            if tThisFlipGlobal > text_4.tStartRefresh + 1.0-frameTolerance:
-                # keep track of stop time/frame for later
-                text_4.tStop = t  # not accounting for scr refresh
-                text_4.frameNStop = frameN  # exact frame index
-                # add timestamp to datafile
-                thisExp.timestampOnFlip(win, 'text_4.stopped')
-                text_4.setAutoDraw(False)
-        
-        # check for quit (typically the Esc key)
-        if endExpNow or defaultKeyboard.getKeys(keyList=["escape"]):
-            core.quit()
-        
-        # check if all components have finished
-        if not continueRoutine:  # a component has requested a forced-end of Routine
-            routineForceEnded = True
-            break
-        continueRoutine = False  # will revert to True if at least one component still running
-        for thisComponent in leegteComponents:
-            if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
-                continueRoutine = True
-                break  # at least one component has not yet finished
-        
-        # refresh the screen
-        if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
-            win.flip()
-    
-    # --- Ending Routine "leegte" ---
-    for thisComponent in leegteComponents:
-        if hasattr(thisComponent, "setAutoDraw"):
-            thisComponent.setAutoDraw(False)
-    # using non-slip timing so subtract the expected duration of this Routine (unless ended on request)
-    if routineForceEnded:
-        routineTimer.reset()
-    else:
-        routineTimer.addTime(-1.000000)
     
     # --- Prepare to start Routine "lekker_pik" ---
     continueRoutine = True
@@ -1056,7 +707,7 @@ key_resp_2.rt = []
 _key_resp_2_allKeys = []
 # Run 'Begin Routine' code from stop_threshold
 f = open("condition.txt", "w")
-f.writelines(["stop_threshold\n", expInfo['participant']])
+f.writelines(["stop_threshold\n", participant])
 f.close()
 # keep track of which components have finished
 bedankt__doeiComponents = [bedanktdoei, key_resp_2]
