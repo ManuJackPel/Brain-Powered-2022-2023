@@ -51,7 +51,6 @@ def data_stream(stream_object, recorder_pipe_start, visualizer_pipe_start, condi
         # Send data to visualizer 
         # print('send array to visualizer')
         visualizer_pipe_start.send(combined_array)
-        print(timestamp)
 
 def record_data_stream(recorder, recorder_pipe_end):
     # Start timer
@@ -60,8 +59,9 @@ def record_data_stream(recorder, recorder_pipe_end):
         # Get stream data
         combined_array = recorder_pipe_end.recv()
         # Append to recorder
-        # recorder.append_data(combined_array)
+        recorder.append_data(combined_array)
         # Save every n seconds
+        print(combined_array[0])
         if time.time() - start_time >= 0.5:
             start_time = time.time()
             pass
@@ -90,8 +90,9 @@ def data_visualization(visualizer_pipe_end, header):
             # Update the plot
             line.set_xdata(time_ch)
             line.set_ydata(volt_ch)
-            # print(time_ch[0], time_ch[-1])
             # Redraw the plot
+            plt.ylim([-0.1,0.1])
+            plt.xlim([time_ch[0], time_ch[-1]])
             fig.canvas.draw()
         # PLT.pause somehow makes the plot show up
         plt.pause(0.000000000000000000000000000000000000001)
