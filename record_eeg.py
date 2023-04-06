@@ -64,8 +64,7 @@ def record_data_stream(recorder, recorder_pipe_end):
         print(combined_array[0])
         if time.time() - start_time >= 0.5:
             start_time = time.time()
-            pass
-            # recorder.save()
+            recorder.save()
     
 def data_visualization(visualizer_pipe_end, header):
     # Init buffer
@@ -119,7 +118,7 @@ if __name__ == "__main__":
 
     print('\nInitializing Recorder')
     header = ['time', 'CH1', 'CH2','CH3', 'CH4', 'CH5', 'CH6', 'CH7', 'CH8', 'CH9', 'condition'] 
-    file_location = '/home/kibble/Documents/School/Brain Powered/Brain-Powered-2022-2023/data/testing/testing_data_9.csv'
+    file_location = '/home/kibble/Documents/School/Brain Powered/Brain-Powered-2022-2023/data/testing/testing_data.csv'
     recorder = Recorder(file_location, header)
 
     # Init Pipeline, set duplex to False to make it unidirectional

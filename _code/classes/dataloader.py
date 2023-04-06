@@ -1,6 +1,7 @@
 "Class for choosing what data to import into the classification progam"
 
 import os 
+import contextlib
 import scipy 
 import numpy as np 
 import matplotlib.pyplot as plt
