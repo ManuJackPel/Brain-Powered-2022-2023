@@ -26,7 +26,7 @@ class Recorder():
             self.empty_buffer()
 
     def empty_buffer(self) -> None:
-        self.buffer = np.empty((0, len(self.header)))
+        self.data_buffer = np.empty((0, len(self.header)))
 
     def file_name_exists(self):
         return os.path.exists(self.file_name)
