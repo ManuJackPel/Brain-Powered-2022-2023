@@ -13,6 +13,7 @@ from functools import partial
 
 from _code.classes.recorder import make_buffer, update_buffer, Recorder
 from _code.classes.dataloader import DataStream
+from pathlib import Path
 
 
 def mute_stdout(func):
@@ -118,7 +119,9 @@ if __name__ == "__main__":
 
     print('\nInitializing Recorder')
     header = ['time', 'CH1', 'CH2','CH3', 'CH4', 'CH5', 'CH6', 'CH7', 'CH8', 'CH9', 'condition'] 
-    file_location = '/home/kibble/Documents/School/Brain Powered/Brain-Powered-2022-2023/data/testing/testing_data.csv'
+    
+    file_location = Path(os.getcwd(), r"data/testing_data.csv")
+    print(file_location.as_posix)
     recorder = Recorder(file_location, header)
 
     # Init Pipeline, set duplex to False to make it unidirectional
