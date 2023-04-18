@@ -5,6 +5,7 @@ import time
 from tkinter import filedialog as fp
 import time
 from multiprocessing import Process, Pipe
+
 import multiprocessing
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
@@ -14,6 +15,7 @@ from functools import partial
 from _code.classes.recorder import make_buffer, update_buffer, Recorder
 from _code.classes.dataloader import DataStream
 from pathlib import Path
+
 
 
 def mute_stdout(func):
@@ -31,6 +33,7 @@ def mute_stdout(func):
 
 # @mute_stdout
 def data_stream(stream_object, recorder_pipe_start, visualizer_pipe_start, condition_pipe_end):
+    eeg_stream = DataStream('mobilab')
     while True:
         # Get condition of task print('recover condition')
         condition, participant = condition_pipe_end.recv()
@@ -41,7 +44,7 @@ def data_stream(stream_object, recorder_pipe_start, visualizer_pipe_start, condi
 
         # Pull sample
         # print('pull_sample')
-        sample, timestamp = stream_object.pull_sample()
+        sample, timestamp = eeg_stream.pull_sample()
         # Combine into immutable array
         # print('combine arrays')
         combined_array = np.array([timestamp] + sample + [condition])
@@ -112,11 +115,14 @@ def get_alpha_task_condition(condition_pipe_start):
             f.seek(0)
 
 if __name__ == "__main__":  
-    # stream_name = input('What is the name of the LSL stream: ')
-    stream_name = 'mobilab'
-    print('\nInitializing DataStream... ')
-    eeg_stream = DataStream(stream_name)
 
+
+    # stream_name = input('What is the name of the LSL stream: ')
+    #stream_name = 'mobilab'
+    #print('\nInitializing DataStream... ')
+    #eeg_stream = DataStream(stream_name)
+    eeg_stream = 'poep'
+    
     print('\nInitializing Recorder')
     header = ['time', 'CH1', 'CH2','CH3', 'CH4', 'CH5', 'CH6', 'CH7', 'CH8', 'CH9', 'condition'] 
     
