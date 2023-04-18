@@ -11,13 +11,12 @@ class Recorder():
             self._create_file()
 
     def append_data(self, data): 
-        if self.file_name_exists():
-            self._append_to_buffer(data)
-        else:
-            self._create_file()
-            self._append_to_buffer(data)
+        self._append_to_buffer(data)
 
     def save(self, reset_buffer=True) -> None:
+        if not self.file_name_exists():
+            self._create_file()
+
         with open(self.file_name, 'a', encoding='UTF8') as f:
             # see if data is one-dimensional
             assert len(self.data_buffer.shape) == 2, "Data to append should be 2D"
@@ -27,8 +26,7 @@ class Recorder():
             self.empty_buffer()
 
     def empty_buffer(self) -> None:
-        pass
-        # self.buffer = np.empty((0, len(self.header)))
+        self.data_buffer = np.empty((0, len(self.header)))
 
     def file_name_exists(self):
         return os.path.exists(self.file_name)
