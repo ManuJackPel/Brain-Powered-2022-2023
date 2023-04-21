@@ -32,7 +32,7 @@ def mute_stdout(func):
 
 
 # @mute_stdout
-def data_stream(stream_object, recorder_pipe_start, visualizer_pipe_start, condition_pipe_end):
+def data_stream(recorder_pipe_start, visualizer_pipe_start, condition_pipe_end):
     eeg_stream = DataStream('mobilab')
     while True:
         # Get condition of task print('recover condition')
@@ -45,8 +45,14 @@ def data_stream(stream_object, recorder_pipe_start, visualizer_pipe_start, condi
         # Pull sample
         # print('pull_sample')
         sample, timestamp = eeg_stream.pull_sample()
+        
+        #Convert occasional nonetype samples into 0 to prevent concatination errors
+        if sample == None:
+            sample = [0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+            timestamp = 0
+            print('we are done')
+
         # Combine into immutable array
-        # print('combine arrays')
         combined_array = np.array([timestamp] + sample + [condition])
         combined_array.setflags(write=False)
         # Send data to recorder
@@ -98,7 +104,7 @@ def data_visualization(visualizer_pipe_end, header):
             plt.xlim([time_ch[0], time_ch[-1]])
             fig.canvas.draw()
         # PLT.pause somehow makes the plot show up
-        plt.pause(0.000000000000000000000000000000000000001)
+        #plt.pause(0.000000000000000000000000000000000000001)
             
 
 def get_alpha_task_condition(condition_pipe_start):
@@ -117,12 +123,6 @@ def get_alpha_task_condition(condition_pipe_start):
 if __name__ == "__main__":  
 
 
-    # stream_name = input('What is the name of the LSL stream: ')
-    #stream_name = 'mobilab'
-    #print('\nInitializing DataStream... ')
-    #eeg_stream = DataStream(stream_name)
-    eeg_stream = 'poep'
-    
     print('\nInitializing Recorder')
     header = ['time', 'CH1', 'CH2','CH3', 'CH4', 'CH5', 'CH6', 'CH7', 'CH8', 'CH9', 'condition'] 
     
@@ -135,7 +135,7 @@ if __name__ == "__main__":
     visualizer_pipe_end, visualizer_pipe_start = Pipe(duplex=False)
     condition_pipe_end, condition_pipe_start = Pipe(duplex=False)
 
-    data_stream_process = Process(target=data_stream, args=(eeg_stream, recorder_pipe_start, visualizer_pipe_start, condition_pipe_end))
+    data_stream_process = Process(target=data_stream, args=(recorder_pipe_start, visualizer_pipe_start, condition_pipe_end))
     recorder_process = Process(target=record_data_stream, args=(recorder, recorder_pipe_end))
     visualization_process = Process(target=data_visualization, args=(visualizer_pipe_end, header))
     alpha_task_process = Process(target = get_alpha_task_condition, args = (condition_pipe_start,))
