@@ -1,32 +1,56 @@
+import numpy as n
+import numpy as np
 import time
 from pylsl import StreamInfo, StreamOutlet
-import math
-from datetime import datetime
-import numpy as np
+from pynput import keyboard
 
-def get_time_format():
-    time_now = datetime.now()
-    minute = time_now.minute * 100
-    second = round(time_now.second / 60 * 100)
-    mili = round(time_now.microsecond / 10**6, 3)
-    return minute + second + mili
+# Set the parameters
+sample_rate = 250  # Hz
+frequency1 = 10  # Hz
+frequency2 = 25  # Hz
+
+# Global variable to track the state of the space bar
+space_pressed = False
+
+# Function to handle key press events
+def on_press(key):
+    global space_pressed
+    if key == keyboard.Key.space:
+        space_pressed = True
+
+# Function to handle key release events
+def on_release(key):
+    global space_pressed
+    if key == keyboard.Key.space:
+        space_pressed = False
+
+# Function to send a sample through the LSL output
+def send_sample(axis3):
+    # Generate EEG-like data
+    eeg_data1 = np.sin(2 * np.pi * frequency1 * time_passed) + np.random.normal(0, 0.1)
+    eeg_data2 = np.sin(2 * np.pi * frequency2 * time_passed) + np.random.normal(0, 0.1)
+
+    outlet.push_sample([eeg_data1 + axis3, eeg_data2])
 
 if __name__ == "__main__":
-    # Create a new stream info with the name 'MyStream', one channel, and a sample rate of 512 Hz
-    info = StreamInfo('dummy_sinewave', 'MySignal', 3, 512, 'float32', 'bpid12345')
-
-    # Create a new stream outlet with the stream info
+    # Create listener and assign event handlers
+    listener = keyboard.Listener(on_press=on_press, on_release=on_release)
+    listener.start()
+    # Create the stream info
+    info = StreamInfo('Brandon Stream', 'EEG', 2, sample_rate, 'float32', 'myuid34234')
+    # Create a stream outlet
     outlet = StreamOutlet(info)
-
+    # Now, for an infinite amount of time, send samples
+    time_passed = 0  # seconds
     while True:
-        # Generate a sine wave signal
-        # sample = [0.5 * math.sin(i / 10.0)]
-        time_now = get_time_format()
-        
-        y = (0.5 * math.sin(time_now) )
-        z = (0.5 * math.cos(time_now) )
+        # Check if the space bar is pressed
+        if space_pressed:
+            axis3 = 5
+        else:
+            axis3 = 0
 
-        outlet.push_sample([time_now, y, z])
-        print(time_now)
-        time.sleep(1/512)
+        send_sample(axis3)
+
+        time.sleep(1 / sample_rate)
+        time_passed += (1 / sample_rate)
 

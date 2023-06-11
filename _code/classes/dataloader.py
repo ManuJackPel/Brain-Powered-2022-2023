@@ -1,23 +1,26 @@
-"Class for choosing what data to import into the classification progam"
+class LockableDeque:
+    def __init__(self,  maxlen: int ):
+        self._deque = deque(maxlen=maxlen)
+        self._lock = False
 
-import os 
-import contextlib
-import scipy 
-import numpy as np 
-import matplotlib.pyplot as plt
-import time
-from pylsl import StreamInlet, resolve_stream
-
-class DataStream:
-    def __init__(self, name):
-        # Resolve EEG stream on lab networ
-        if name == 'mobilab':
-            streams = resolve_stream('type', 'EEG')
+    def append(self, item):
+        if not self._lock:
+            self._deque.append(item)
         else:
-            streams = resolve_stream('name', 'dummy_sinewave')
-        # Create a new inlet to read from 
-        self.inlet = StreamInlet(streams[0])
+            raise Exception("Deque is locked, append operation not allowed.")
 
-    def pull_sample(self):
-        return self.inlet.pull_sample()
-        
+    def lock(self):
+        self._lock = True
+
+    def unlock(self):
+        self._lock = False
+
+    def __getitem__(self, index):
+        return self._deque[index]
+
+    def __len__(self):
+        return len(self._deque)
+
+    def __str__(self):
+        return str(self._deque)
+       
