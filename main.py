@@ -7,6 +7,7 @@ import sys
 import sklearn
 from sklearn.neighbors import KNeighborsClassifier
 from scipy.signal import butter, sosfiltfilt
+import socket
 
 from get_training_data import get_filtered_matrices
 from _code.classifiers import detect_blinks, butter_bandpass_filter
@@ -18,6 +19,10 @@ BUFFER_MEMORY_SEC = 2
 BUFFER_SIZE = SAMPLE_FREQ_HZ * BUFFER_MEMORY_SEC
 cl1 = 'left'
 cl2 = 'right'
+
+# get local machine name (replace with your manually set IP)
+host = "192.168.4.20" 
+port = 9999
 
 def bandpass(x):
     return sosfiltfilt(sos, x)
@@ -45,7 +50,6 @@ def main():
     
     clf = KNeighborsClassifier(n_neighbors=3)
     clf.fit(train_data, train_labels)
-    exit()
 
     # Load inlet
     streams = resolve_stream('name', 'Brandon Stream')
@@ -55,8 +59,8 @@ def main():
     data_queue = Queue(maxsize=5)
 
     # Create the processes
-    p1 = Process(target=acquire_data, args=(queue, inlet))
-    p2 = Process(target=classify_data, args=(queue, clf, csp))
+    p1 = Process(target=acquire_data, args=(data_queue, inlet))
+    p2 = Process(target=classify_data, args=(data_queue, clf, csp))
 
     # Start the processes
     p1.start()
@@ -86,32 +90,32 @@ def acquire_data(queue, inlet):
 
             elapsed_time = time.time()
             
-def classify_data(queue, clf, csp, results_queue):
+def classify_data(queue, clf, csp):
     get_Fp1_channel = lambda trial: trial[:, 0]
     drone_movement_axis = 'front-back'
     results_queue = deque(maxlen=5)
     sos = butter(N=2, Wn=[8, 15], btype='band', fs=250, output='sos')
 
-    def connect():
-        # create a socket object
-        global serversocket
-        serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    # def connect():
+    #     # create a socket object
+    #     global serversocket
+    #     serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-        # bind to the port
-        serversocket.bind((host, port))
+    #     # bind to the port
+    #     serversocket.bind((host, port))
             
-        # queue up to 5 requests
-        serversocket.listen(5)
+    #     # queue up to 5 requests
+    #     serversocket.listen(5)
 
-        # establish a connection
-        global clientsocket
-        clientsocket, addr = serversocket.accept()
+    #     # establish a connection
+    #     global clientsocket
+    #     clientsocket, addr = serversocket.accept()
 
-        print("Got a connection from %s" % str(addr))
+    #     print("Got a connection from %s" % str(addr))
 
-        global msg
-        msg = 'Thank you for connecting'+ "\r\n"
-    connect()
+    #     global msg
+    #     msg = 'Thank you for connecting'+ "\r\n"
+    # connect()
 
     while True:
         # Check if queue has trial
@@ -130,12 +134,13 @@ def classify_data(queue, clf, csp, results_queue):
             results_queue.append(result)
             # If all results are the same send the command to drone
             if results_queue.count(results_queue[0]) == len(results_queue):
-                try:
-                    clientsocket.send(repr(results).encode('ascii'))
+                pass
+                # try:
+                #     clientsocket.send(repr(results).encode('ascii'))
 
-                except ConnectionResetError:
-                    print('Client got me shy. Reconnecting now.')
-                    connect()
+                # except ConnectionResetError:
+                #     print('Client got me shy. Reconnecting now.')
+                #     connect()
 
                 
             print(f'Drone Command :{result}')
